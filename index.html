@@ -368,23 +368,23 @@
       -webkit-backdrop-filter: blur(22px);
       border: 1px solid var(--border-strong);
       border-radius: var(--radius-pill);
-      padding: 6px 8px;
+      padding: 5px 6px;
       box-shadow: var(--shadow-md);
-      gap: 4px;
-      max-width: calc(100vw - 24px);
+      gap: 2px;
+      max-width: calc(100vw - 16px);
     }
 
     .mobile-dock a {
       text-decoration: none;
       color: var(--text-soft);
-      font-size: 0.76rem;
-      font-weight: 700;
-      padding: 8px 12px;
+      font-size: 0.72rem;
+      font-weight: 750;
+      padding: 7px 9px;
       border-radius: var(--radius-pill);
       white-space: nowrap;
       display: inline-flex;
       align-items: center;
-      gap: 5px;
+      gap: 4px;
       transition: background 0.2s ease, color 0.2s ease;
     }
 
@@ -795,8 +795,388 @@
     }
 
     /* ============================================================
-       MINI-GAME SECTION (iPhone Scroll-Safe + Thumb Track!)
+       OUR MOMENTS VAULT (Polaroid Memory #1 + Future Locked Slots)
        ============================================================ */
+    .moments-progress-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 6px;
+      padding: 6px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-solid);
+      border: 1px solid var(--border-strong);
+      font-size: 0.8rem;
+      font-weight: 750;
+      color: var(--text-soft);
+      width: fit-content;
+    }
+
+    .moments-progress-bar strong {
+      color: var(--accent);
+    }
+
+    .moment-featured {
+      display: grid;
+      grid-template-columns: 300px 1fr;
+      gap: 24px;
+      padding: 22px;
+      border-radius: var(--radius-xl);
+      background: linear-gradient(135deg, var(--surface-elevated) 0%, var(--bg-alt) 100%);
+      border: 1.5px solid var(--border-strong);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+      margin-bottom: 18px;
+    }
+
+    .moment-featured::before {
+      content: "";
+      position: absolute;
+      top: -60px;
+      right: -60px;
+      width: 220px;
+      height: 220px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(255, 59, 127, 0.18), transparent 70%);
+      pointer-events: none;
+    }
+
+    /* Tactile Polaroid Card */
+    .polaroid-frame {
+      background: var(--surface-solid);
+      padding: 12px 12px 16px;
+      border-radius: 20px;
+      border: 1px solid var(--border);
+      box-shadow: 0 14px 34px -10px rgba(180, 45, 105, 0.22);
+      transform: rotate(-1.5deg);
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .polaroid-frame:hover,
+    .polaroid-frame:active {
+      transform: rotate(0deg) scale(1.02);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .polaroid-art {
+      height: 215px;
+      border-radius: 14px;
+      background: radial-gradient(circle at 30% 25%, #ff7eb3 0%, #ff3b7f 42%, #6d28d9 100%);
+      position: relative;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      color: #ffffff;
+    }
+
+    .polaroid-stars {
+      position: absolute;
+      inset: 0;
+      background-image:
+        radial-gradient(2px 2px at 20% 30%, rgba(255,255,255,0.9), transparent),
+        radial-gradient(2px 2px at 78% 22%, rgba(255,255,255,0.85), transparent),
+        radial-gradient(1.5px 1.5px at 62% 72%, rgba(255,255,255,0.8), transparent),
+        radial-gradient(2.5px 2.5px at 28% 76%, rgba(255,255,255,0.75), transparent),
+        radial-gradient(1.5px 1.5px at 84% 64%, rgba(255,255,255,0.9), transparent);
+      animation: twinkleStars 4s infinite alternate ease-in-out;
+    }
+
+    @keyframes twinkleStars {
+      0% { opacity: 0.55; transform: scale(1); }
+      100% { opacity: 1; transform: scale(1.05); }
+    }
+
+    .polaroid-center-icon {
+      font-size: 3.6rem;
+      position: relative;
+      z-index: 2;
+      filter: drop-shadow(0 8px 18px rgba(0, 0, 0, 0.25));
+      animation: kissFloat 2.8s infinite ease-in-out;
+    }
+
+    @keyframes kissFloat {
+      0%, 100% { transform: translateY(0) scale(1); }
+      50% { transform: translateY(-6px) scale(1.08); }
+    }
+
+    .polaroid-art-tag {
+      position: relative;
+      z-index: 2;
+      margin-top: 8px;
+      padding: 4px 12px;
+      border-radius: var(--radius-pill);
+      background: rgba(255, 255, 255, 0.22);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      font-size: 0.74rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+    }
+
+    .polaroid-caption {
+      margin-top: 12px;
+      text-align: center;
+      font-size: 0.84rem;
+      font-weight: 750;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 4px;
+    }
+
+    .polaroid-caption span:last-child {
+      font-size: 0.75rem;
+      color: var(--accent);
+      font-weight: 800;
+    }
+
+    .moment-details {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 14px;
+      position: relative;
+      z-index: 2;
+    }
+
+    .moment-live-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 5px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      border: 1px solid var(--border-strong);
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.05em;
+      text-transform: uppercase;
+      width: fit-content;
+      margin-bottom: 8px;
+    }
+
+    .moment-details h3 {
+      font-size: clamp(1.4rem, 3.2vw, 1.85rem);
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 8px;
+    }
+
+    .moment-details p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      line-height: 1.6;
+    }
+
+    .moment-metrics {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 12px;
+    }
+
+    .metric-chip {
+      padding: 6px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      font-size: 0.8rem;
+      font-weight: 700;
+      color: var(--text);
+    }
+
+    .moment-cta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 4px;
+    }
+
+    /* Future Locked Moments Grid */
+    .future-moments-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-bottom: 16px;
+    }
+
+    .future-slot {
+      background: var(--surface);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border: 1.5px dashed var(--border-strong);
+      border-radius: 20px;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      gap: 12px;
+      cursor: pointer;
+      transition: transform 0.22s ease, border-color 0.22s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .future-slot:active {
+      transform: scale(0.97);
+    }
+
+    .future-slot.custom-unlocked {
+      border-style: solid;
+      border-color: var(--accent);
+      background: linear-gradient(155deg, var(--surface-solid), var(--accent-soft));
+    }
+
+    .future-preview {
+      height: 104px;
+      border-radius: 14px;
+      background: repeating-linear-gradient(
+        -45deg,
+        var(--bg-alt),
+        var(--bg-alt) 12px,
+        var(--surface-solid) 12px,
+        var(--surface-solid) 24px
+      );
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 4px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .future-slot.custom-unlocked .future-preview {
+      background: linear-gradient(135deg, rgba(255,59,127,0.16), rgba(168,85,247,0.18));
+    }
+
+    .slot-lock-icon {
+      font-size: 1.55rem;
+      transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .future-slot.wiggle .slot-lock-icon {
+      transform: rotate(-16deg) scale(1.2);
+    }
+
+    .slot-num {
+      font-size: 0.7rem;
+      font-weight: 800;
+      letter-spacing: 0.07em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .future-slot h4 {
+      font-size: 0.98rem;
+      font-weight: 800;
+      letter-spacing: -0.01em;
+      margin-bottom: 4px;
+    }
+
+    .future-slot p {
+      font-size: 0.82rem;
+      color: var(--text-soft);
+      line-height: 1.45;
+    }
+
+    /* Interactive Wish Capsule */
+    .wish-capsule {
+      padding: 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border-strong);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .wish-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .wish-head h4 {
+      font-size: 1.04rem;
+      font-weight: 800;
+    }
+
+    .wish-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-bottom: 12px;
+    }
+
+    .wish-chip {
+      padding: 7px 12px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-solid);
+      border: 1px solid var(--border-strong);
+      color: var(--text-soft);
+      font-size: 0.8rem;
+      font-weight: 700;
+      cursor: pointer;
+      font-family: inherit;
+      transition: background 0.18s ease, color 0.18s ease, transform 0.15s ease;
+    }
+
+    .wish-chip:active,
+    .wish-chip:hover {
+      background: var(--accent-soft);
+      color: var(--accent);
+      transform: scale(0.97);
+    }
+
+    .wish-form {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    /* 16px font prevents iPhone Safari auto-zoom! */
+    .wish-input {
+      flex: 1;
+      min-width: 210px;
+      padding: 12px 16px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--text);
+      font-size: 16px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .wish-input:focus {
+      border-color: var(--accent);
+    }
+
+    /* Gentle Scroll Reveal */
+    .reveal-on-scroll {
+      opacity: 0;
+      transform: translateY(18px);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .reveal-on-scroll.in-view {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .game-wrapper {
       background: var(--surface);
       backdrop-filter: blur(20px);
@@ -1322,6 +1702,19 @@
       .col-7, .col-5, .col-6 {
         grid-column: span 12;
       }
+      .moment-featured {
+        grid-template-columns: 1fr;
+        gap: 18px;
+      }
+      .polaroid-frame {
+        max-width: 340px;
+        width: 100%;
+        margin: 0 auto;
+        transform: rotate(-1deg);
+      }
+      .future-moments-grid {
+        grid-template-columns: 1fr;
+      }
       .roadmap {
         grid-template-columns: repeat(2, 1fr);
       }
@@ -1401,9 +1794,10 @@
       </a>
       <div class="nav-links">
         <a href="#analytics">Аналитика</a>
+        <a href="#moments">Моменты 💋</a>
         <a href="#minigame">Мини-игра</a>
         <a href="#coupons">Купоны</a>
-        <a href="#question">Главный вопрос</a>
+        <a href="#question">Вопрос</a>
       </div>
       <div class="nav-actions">
         <button class="icon-btn" id="sound-btn" title="Звуковые эффекты" aria-label="Звук">🔊</button>
@@ -1413,8 +1807,9 @@
   </div>
 
   <!-- iPhone Floating Bottom Quick-Nav Dock -->
-  <nav class="mobile-dock" aria-label="Быстрая навигация">
+  <nav class="mobile-dock" id="mobile-dock" aria-label="Быстрая навигация">
     <a href="#analytics">📊 Факты</a>
+    <a href="#moments">💋 Моменты</a>
     <a href="#minigame">🎮 Игра</a>
     <a href="#coupons">🎟️ Купоны</a>
     <a href="#question">💌 Вопрос</a>
@@ -1551,8 +1946,120 @@
       </div>
     </section>
 
+    <!-- OUR MOMENTS VAULT -->
+    <section class="section reveal-on-scroll" id="moments">
+      <div class="section-head">
+        <span class="section-tag">Живой фотоальбом нашей истории</span>
+        <h2 class="section-title">Наши моменты</h2>
+        <p class="section-desc">
+          Самые важные кадры, которые хочется сохранить навсегда. Пока здесь горит наш главный сегодняшний момент — а остальные ячейки мы откроем вместе.
+        </p>
+        <div class="moments-progress-bar">
+          <span>✨ Открыто моментов: <strong id="moments-count">1</strong> из ∞</span>
+        </div>
+      </div>
+
+      <!-- Featured Unlocked Moment #1: Today's First Kiss -->
+      <div class="moment-featured">
+        <div class="polaroid-frame" id="first-kiss-polaroid" title="Нажми на полароид ✨">
+          <div class="polaroid-art">
+            <div class="polaroid-stars"></div>
+            <div class="polaroid-center-icon">💋✨</div>
+            <div class="polaroid-art-tag">Тапни на кадр 💗</div>
+          </div>
+          <div class="polaroid-caption">
+            <span>Кадр #01 • 15 ноября</span>
+            <span>СЕГОДНЯ</span>
+          </div>
+        </div>
+
+        <div class="moment-details">
+          <div>
+            <div class="moment-live-pill">
+              <span class="live-dot"></span>
+              <span>Открыто сегодня • День №2</span>
+            </div>
+            <h3>Наш первый поцелуй 💋</h3>
+            <p>
+              Момент, когда всё вокруг будто поставилось на паузу, время остановилось, а внутри перевернулся целый мир. Официально — самая тёплая, волнительная и любимая секунда за эти два дня (и лучший спойлер к тому, как круто нам будет дальше).
+            </p>
+            <div class="moment-metrics">
+              <span class="metric-chip">💓 Пульс: ~180 уд/мин</span>
+              <span class="metric-chip">🦋 Мурашки: 10 / 10</span>
+              <span class="metric-chip" id="kiss-Counter-chip">💋 Бронь на повтор: 1</span>
+            </div>
+          </div>
+
+          <div class="moment-cta-row">
+            <button class="btn btn-primary" id="repeat-kiss-btn">Повторить при встрече 💋</button>
+            <button class="btn btn-soft" id="share-kiss-btn">Написать мне об этом 💌</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- Locked Future Slots (To Be Unlocked Together!) -->
+      <div class="future-moments-grid" id="future-moments-grid">
+        <div class="future-slot locked-slot" data-hint="Спойлер: это свидание уже совсем близко, Милана 😉☕">
+          <div class="future-preview">
+            <span class="slot-lock-icon">🔒</span>
+            <span class="slot-num">Кадр #02 • Скоро</span>
+          </div>
+          <div>
+            <h4>Долгое свидание без спешки</h4>
+            <p>Тот самый вечер, где никто никуда не торопится, много смеха и новые воспоминания.</p>
+          </div>
+        </div>
+
+        <div class="future-slot locked-slot" data-hint="Место официально забронировано под нашу лучшую фотку 📸💖">
+          <div class="future-preview">
+            <span class="slot-lock-icon">📸</span>
+            <span class="slot-num">Кадр #03 • Скоро</span>
+          </div>
+          <div>
+            <h4>Наше первое общее фото здесь</h4>
+            <p>Рамка уже ждёт кадр, где мы рядом и ты улыбаешься своей самой красивой улыбкой.</p>
+          </div>
+        </div>
+
+        <div class="future-slot locked-slot" data-hint="Этот секретный уровень мы разблокируем чуть позже ✨🌙">
+          <div class="future-preview">
+            <span class="slot-lock-icon">✨</span>
+            <span class="slot-num">Кадр #04 • Скоро</span>
+          </div>
+          <div>
+            <h4>Спонтанное приключение вдвоём</h4>
+            <p>Сорваться куда-нибудь вместе и понять, что с тобой любое место — идеальное.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Interactive Wish Capsule: Milana can add the next moment! -->
+      <div class="wish-capsule">
+        <div class="wish-head">
+          <h4>🌠 Загадай наш следующий момент, Милана</h4>
+          <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 650;">Появится прямо в альбоме выше!</span>
+        </div>
+        <div class="wish-chips">
+          <button type="button" class="wish-chip" data-wish="Гулять вдвоём под ночную музыку 🌙">🌙 Ночная прогулка</button>
+          <button type="button" class="wish-chip" data-wish="Смотреть фильм в обнимку с вкусняшками 🎬">🎬 Кино в обнимку</button>
+          <button type="button" class="wish-chip" data-wish="Встретить красивый закат с кофе ☕✨">☕ Закат с кофе</button>
+          <button type="button" class="wish-chip" data-wish="Устроить спонтанную поездку вдвоём 🚗">🚗 Поездка вдвоём</button>
+        </div>
+        <form class="wish-form" id="wish-form">
+          <input
+            type="text"
+            class="wish-input"
+            id="wish-input"
+            maxlength="90"
+            placeholder="Или напиши свою идею момента..."
+          />
+          <button type="submit" class="btn btn-primary">Добавить в наш план 💌</button>
+        </form>
+      </div>
+    </section>
+
     <!-- MINI GAME -->
-    <section class="section" id="minigame">
+    <section class="section reveal-on-scroll" id="minigame">
       <div class="section-head">
         <span class="section-tag">Интерактивный квест</span>
         <h2 class="section-title">Мини-игра: «Поймай моё сердечко»</h2>
@@ -1594,7 +2101,7 @@
     </section>
 
     <!-- COUPONS -->
-    <section class="section" id="coupons">
+    <section class="section reveal-on-scroll" id="coupons">
       <div class="section-head">
         <span class="section-tag">Лимитированный выпуск</span>
         <h2 class="section-title">Личные купоны для Миланы</h2>
@@ -1714,7 +2221,7 @@
     </section>
 
     <!-- ROADMAP -->
-    <section class="section">
+    <section class="section reveal-on-scroll">
       <div class="section-head">
         <span class="section-tag">Дорожная карта</span>
         <h2 class="section-title">Наш грандиозный план</h2>
@@ -1723,22 +2230,22 @@
         <div class="step-card">
           <div class="step-day">День 1 ✓</div>
           <h5>Официальный старт</h5>
-          <p>Точка отсчёта, первые мурашки и понимание, что это начало чего-то очень классного.</p>
+          <p>Точка отсчёта, первые бабочки и понимание, что это начало чего-то очень особенного.</p>
         </div>
         <div class="step-card current">
-          <div class="step-day">День 2 • Сегодня</div>
-          <h5>Запуск сайта Миланы</h5>
-          <p>Первые 48 часов полёта пройдены успешно, улыбка на твоём лице зафиксирована!</p>
+          <div class="step-day">День 2 • Сегодня 💋</div>
+          <h5>Первый поцелуй и твой сайт</h5>
+          <p>Главный момент этого дня уже навсегда в нашем альбоме выше, а улыбка зафиксирована!</p>
         </div>
         <div class="step-card">
           <div class="step-day">День 3 →</div>
           <h5>Новое свидание</h5>
-          <p>Обналичиваем купоны, пьём вкусный кофе и обнимаемся уже без экранов.</p>
+          <p>Обналичиваем купоны, повторяем сегодняшний момент и заполняем новые кадры.</p>
         </div>
         <div class="step-card">
           <div class="step-day">День 365+ ♾️</div>
-          <h5>Открыть этот сайт снова</h5>
-          <p>Пересмотреть, посмеяться над «целыми двумя днями» и порадоваться за нас.</p>
+          <h5>Открыть полный альбом</h5>
+          <p>Пересмотреть десятки открытых моментов и улыбнуться тому, с чего всё начиналось.</p>
         </div>
       </div>
     </section>
@@ -2694,6 +3201,160 @@
       playWinChord();
       spawnHeartsBurst(window.innerWidth * 0.5, window.innerHeight * 0.45, 50);
     });
+
+    // =========================================================================
+    // 11. OUR MOMENTS VAULT (Today's First Kiss + Future Slots + Wish Capsule)
+    // =========================================================================
+    let kissRepeatCount = Number(safeStorage.get('milana_kiss_repeats') || 1);
+    const kissChip = document.getElementById('kiss-Counter-chip');
+    const firstKissPolaroid = document.getElementById('first-kiss-polaroid');
+    const repeatKissBtn = document.getElementById('repeat-kiss-btn');
+    const shareKissBtn = document.getElementById('share-kiss-btn');
+
+    function renderKissChip() {
+      if (kissChip) kissChip.textContent = `💋 Бронь на повтор: ${kissRepeatCount}`;
+    }
+    renderKissChip();
+
+    function triggerKissSparkle(el) {
+      const rect = el.getBoundingClientRect();
+      spawnHeartsBurst(rect.left + rect.width / 2, rect.top + rect.height * 0.4, 30);
+      playWinChord();
+    }
+
+    firstKissPolaroid.addEventListener('click', (e) => {
+      triggerKissSparkle(e.currentTarget);
+      showToast('Кадр #01: Наш сегодняшний первый поцелуй 💋✨');
+    });
+
+    repeatKissBtn.addEventListener('click', (e) => {
+      kissRepeatCount++;
+      safeStorage.set('milana_kiss_repeats', kissRepeatCount);
+      renderKissChip();
+      triggerKissSparkle(e.currentTarget);
+      showToast(`Забронировано повторов при встрече: ${kissRepeatCount} 💋💖`);
+    });
+
+    shareKissBtn.addEventListener('click', () => {
+      playPop();
+      const msg = `Я увидела на сайте наш Кадр #01 про сегодняшний первый поцелуй… 💋✨ Официально забронировала повторов при встрече: ${kissRepeatCount}!`;
+      shareOrCopy(msg, 'Сообщение про первый поцелуй скопировано для чата! 💋');
+    });
+
+    // Locked future slots playful teaser
+    document.querySelectorAll('.locked-slot').forEach((slot) => {
+      slot.addEventListener('click', () => {
+        slot.classList.add('wiggle');
+        playPop();
+        setTimeout(() => slot.classList.remove('wiggle'), 340);
+        showToast(slot.dataset.hint || 'Скоро откроем этот момент вместе! ✨');
+      });
+    });
+
+    // Interactive Wish Capsule (Milana adds next moment!)
+    const wishInput = document.getElementById('wish-input');
+    const wishForm = document.getElementById('wish-form');
+    const futureGrid = document.getElementById('future-moments-grid');
+
+    document.querySelectorAll('.wish-chip').forEach((chip) => {
+      chip.addEventListener('click', () => {
+        wishInput.value = chip.dataset.wish || '';
+        wishInput.focus();
+        playPop();
+      });
+    });
+
+    function renderSavedWish(wishText, animate = false) {
+      if (!wishText) return;
+      let existing = document.getElementById('milana-custom-wish-slot');
+      if (!existing) {
+        existing = document.createElement('div');
+        existing.id = 'milana-custom-wish-slot';
+        existing.className = 'future-slot custom-unlocked';
+        futureGrid.prepend(existing);
+      }
+      existing.innerHTML = '';
+      const preview = document.createElement('div');
+      preview.className = 'future-preview';
+      preview.innerHTML = '<span class="slot-lock-icon">🌠</span><span class="slot-num" style="color:var(--accent);">Загадано Миланой</span>';
+
+      const body = document.createElement('div');
+      const h4 = document.createElement('h4');
+      h4.textContent = wishText;
+      const p = document.createElement('p');
+      p.textContent = 'Забронировано в наш ближайший план! Нажми, чтобы переслать мне в чат 💌';
+      body.appendChild(h4);
+      body.appendChild(p);
+
+      existing.appendChild(preview);
+      existing.appendChild(body);
+
+      existing.onclick = () => {
+        playPop();
+        shareOrCopy(`Я добавила в наш альбом следующий момент: «${wishText}» 🌠💖 Когда устроим?`, 'Идея скопирована для чата! 💌');
+      };
+
+      if (animate) {
+        const rect = existing.getBoundingClientRect();
+        spawnHeartsBurst(rect.left + rect.width / 2, Math.max(80, rect.top + 40), 28);
+      }
+    }
+
+    const savedWish = safeStorage.get('milana_next_wish');
+    if (savedWish) renderSavedWish(savedWish, false);
+
+    wishForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const val = wishInput.value.trim();
+      if (!val) {
+        showToast('Выбери кнопку с идеей выше или напиши свою ✨');
+        return;
+      }
+      safeStorage.set('milana_next_wish', val);
+      renderSavedWish(val, true);
+      playWinChord();
+      wishInput.value = '';
+      wishInput.blur();
+      shareOrCopy(
+        `Я загадала на твоём сайте наш следующий момент: «${val}» 🌠💖 Жду исполнения!`,
+        'Момент добавлен в альбом и скопирован для нашего чата! 🌠💌'
+      );
+    });
+
+    // =========================================================================
+    // 12. SCROLL REVEAL & IPHONE ACTIVE DOCK HIGHLIGHT
+    // =========================================================================
+    const revealEls = document.querySelectorAll('.reveal-on-scroll');
+    if ('IntersectionObserver' in window) {
+      const revObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('in-view');
+            revObs.unobserve(entry.target);
+          }
+        });
+      }, { threshold: 0.08 });
+      revealEls.forEach((el) => revObs.observe(el));
+    } else {
+      revealEls.forEach((el) => el.classList.add('in-view'));
+    }
+
+    const dockLinks = document.querySelectorAll('#mobile-dock a');
+    const trackedIds = ['analytics', 'moments', 'minigame', 'coupons', 'question'];
+    if ('IntersectionObserver' in window && dockLinks.length) {
+      const navObs = new IntersectionObserver((entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = '#' + entry.target.id;
+            dockLinks.forEach((a) => a.classList.toggle('active', a.getAttribute('href') === id));
+          }
+        });
+      }, { rootMargin: '-35% 0px -50% 0px' });
+      trackedIds.forEach((id) => {
+        const el = document.getElementById(id);
+        if (el) navObs.observe(el);
+      });
+    }
   </script>
 </body>
 </html>
