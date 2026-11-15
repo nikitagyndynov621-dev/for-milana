@@ -1,0 +1,2699 @@
+<!DOCTYPE html>
+<html lang="ru" data-theme="light">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+  <meta name="format-detection" content="telephone=no" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+  <meta name="apple-mobile-web-app-title" content="Для Миланы 💖" />
+  <meta name="theme-color" content="#fff9fb" id="meta-theme-color" />
+  <meta property="og:title" content="Для Миланы — Целых 2 дня вместе 💖" />
+  <meta property="og:description" content="Личный интерактивный портал в честь наших первых 48 часов. Открой скорее ✨" />
+  <meta property="og:type" content="website" />
+  <title>Для Миланы — Целых 2 дня вместе 💖</title>
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>💖</text></svg>" />
+  <style>
+    :root {
+      --bg: #fff9fb;
+      --bg-alt: #fff1f6;
+      --surface: rgba(255, 255, 255, 0.80);
+      --surface-solid: #ffffff;
+      --surface-elevated: rgba(255, 255, 255, 0.94);
+      --border: rgba(236, 72, 153, 0.15);
+      --border-strong: rgba(236, 72, 153, 0.30);
+      --text: #1c1321;
+      --text-soft: #665671;
+      --text-muted: #9886a4;
+      --accent: #ff3b7f;
+      --accent-2: #ff7a59;
+      --accent-3: #a855f7;
+      --accent-soft: rgba(255, 59, 127, 0.11);
+      --gold: #f59e0b;
+      --gold-soft: rgba(245, 158, 11, 0.14);
+      --mint: #10b981;
+      --shadow-sm: 0 8px 24px -6px rgba(180, 60, 110, 0.09);
+      --shadow-md: 0 18px 45px -12px rgba(180, 60, 110, 0.14);
+      --shadow-glow: 0 12px 32px -6px rgba(255, 59, 127, 0.40);
+      --radius-xl: 28px;
+      --radius-lg: 22px;
+      --radius-md: 16px;
+      --radius-pill: 999px;
+      --blob-1: rgba(255, 130, 178, 0.34);
+      --blob-2: rgba(255, 184, 140, 0.28);
+      --blob-3: rgba(196, 148, 255, 0.26);
+      --safe-top: env(safe-area-inset-top, 0px);
+      --safe-bottom: env(safe-area-inset-bottom, 0px);
+    }
+
+    [data-theme="dark"] {
+      --bg: #0e0a14;
+      --bg-alt: #171022;
+      --surface: rgba(28, 20, 40, 0.80);
+      --surface-solid: #1e152b;
+      --surface-elevated: rgba(36, 25, 52, 0.94);
+      --border: rgba(255, 107, 163, 0.19);
+      --border-strong: rgba(255, 107, 163, 0.38);
+      --text: #fdf7fb;
+      --text-soft: #c9b9d7;
+      --text-muted: #8e7c9f;
+      --accent: #ff4d8d;
+      --accent-2: #ff8c69;
+      --accent-3: #c084fc;
+      --accent-soft: rgba(255, 77, 141, 0.17);
+      --gold: #fbbf24;
+      --gold-soft: rgba(251, 191, 36, 0.17);
+      --shadow-sm: 0 8px 24px -6px rgba(0, 0, 0, 0.45);
+      --shadow-md: 0 20px 50px -12px rgba(0, 0, 0, 0.60);
+      --shadow-glow: 0 12px 34px -6px rgba(255, 77, 141, 0.48);
+      --blob-1: rgba(255, 59, 127, 0.22);
+      --blob-2: rgba(168, 85, 247, 0.22);
+      --blob-3: rgba(255, 122, 89, 0.16);
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Inter", "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg);
+      color: var(--text);
+      min-height: 100vh;
+      min-height: 100dvh;
+      overflow-x: hidden;
+      line-height: 1.5;
+      transition: background-color 0.35s ease, color 0.35s ease;
+      position: relative;
+    }
+
+    body.locked-intro {
+      overflow: hidden;
+      height: 100vh;
+      height: 100dvh;
+    }
+
+    button, a, .toggle-row, .coupon-lock, .bento-card {
+      touch-action: manipulation;
+    }
+
+    /* ============================================================
+       INTRO ENVELOPE SPLASH (Unlocks iOS Audio + Wow First Moment)
+       ============================================================ */
+    .intro-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 900;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: calc(20px + var(--safe-top)) 20px calc(24px + var(--safe-bottom));
+      background: radial-gradient(circle at 50% 25%, var(--bg-alt) 0%, var(--bg) 75%);
+      transition: opacity 0.55s cubic-bezier(0.22, 1, 0.36, 1), transform 0.55s cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .intro-screen.opened {
+      opacity: 0;
+      transform: scale(1.07);
+      pointer-events: none;
+    }
+
+    .envelope-card {
+      width: 100%;
+      max-width: 410px;
+      padding: 36px 26px 32px;
+      border-radius: 32px;
+      background: var(--surface-elevated);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1.5px solid var(--border-strong);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .envelope-seal {
+      width: 78px;
+      height: 78px;
+      margin: 0 auto 18px;
+      border-radius: 24px;
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      box-shadow: var(--shadow-glow);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 2.25rem;
+      animation: floatSeal 2.8s infinite ease-in-out;
+    }
+
+    @keyframes floatSeal {
+      0%, 100% { transform: translateY(0) rotate(-3deg); }
+      50% { transform: translateY(-7px) rotate(3deg); }
+    }
+
+    .envelope-tag {
+      display: inline-block;
+      padding: 5px 13px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.75rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .envelope-card h2 {
+      font-size: 1.72rem;
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 10px;
+    }
+
+    .envelope-card p {
+      font-size: 0.95rem;
+      color: var(--text-soft);
+      margin-bottom: 24px;
+      line-height: 1.55;
+    }
+
+    .open-btn {
+      width: 100%;
+      padding: 16px 24px !important;
+      font-size: 1.02rem !important;
+    }
+
+    /* Ambient Liquid Aurora Background */
+    .ambient-bg {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+      overflow: hidden;
+    }
+
+    .blob {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(72px);
+      -webkit-filter: blur(72px);
+      will-change: transform;
+      animation: floatBlob 18s infinite alternate ease-in-out;
+    }
+
+    .blob-1 {
+      width: 440px;
+      height: 440px;
+      background: var(--blob-1);
+      top: -120px;
+      left: -110px;
+    }
+
+    .blob-2 {
+      width: 390px;
+      height: 390px;
+      background: var(--blob-2);
+      top: 30%;
+      right: -120px;
+      animation-delay: -6s;
+    }
+
+    .blob-3 {
+      width: 420px;
+      height: 420px;
+      background: var(--blob-3);
+      bottom: -120px;
+      left: 12%;
+      animation-delay: -11s;
+    }
+
+    @keyframes floatBlob {
+      0% { transform: translate3d(0, 0, 0) scale(1); }
+      50% { transform: translate3d(28px, -24px, 0) scale(1.06); }
+      100% { transform: translate3d(-20px, 28px, 0) scale(0.95); }
+    }
+
+    /* Celebration Canvas */
+    #fx-canvas {
+      position: fixed;
+      inset: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 999;
+    }
+
+    /* Top Sticky Glass Navbar (Dynamic Island & Safe Area Ready) */
+    .nav-wrap {
+      position: sticky;
+      top: calc(10px + var(--safe-top));
+      z-index: 50;
+      display: flex;
+      justify-content: center;
+      padding: 0 14px;
+      margin-top: calc(10px + var(--safe-top));
+    }
+
+    .navbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      width: 100%;
+      max-width: 980px;
+      padding: 9px 12px 9px 16px;
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-pill);
+      box-shadow: var(--shadow-sm);
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 9px;
+      font-weight: 750;
+      font-size: 0.94rem;
+      letter-spacing: -0.02em;
+      text-decoration: none;
+      color: var(--text);
+      white-space: nowrap;
+    }
+
+    .live-dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      background: var(--accent);
+      box-shadow: 0 0 0 0 rgba(255, 59, 127, 0.7);
+      animation: pulseDot 1.8s infinite;
+      flex-shrink: 0;
+    }
+
+    @keyframes pulseDot {
+      0% { box-shadow: 0 0 0 0 rgba(255, 59, 127, 0.65); }
+      70% { box-shadow: 0 0 0 9px rgba(255, 59, 127, 0); }
+      100% { box-shadow: 0 0 0 0 rgba(255, 59, 127, 0); }
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text-soft);
+      font-size: 0.86rem;
+      font-weight: 650;
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      transition: all 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--accent);
+      background: var(--accent-soft);
+    }
+
+    .nav-actions {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .icon-btn {
+      border: 1px solid var(--border);
+      background: var(--surface-solid);
+      color: var(--text);
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      font-size: 1rem;
+      transition: transform 0.2s cubic-bezier(0.34, 1.56, 0.64, 1), border-color 0.2s;
+    }
+
+    .icon-btn:active {
+      transform: scale(0.90);
+    }
+
+    /* Mobile Floating Bottom Quick-Dock (iPhone Style) */
+    .mobile-dock {
+      display: none;
+      position: fixed;
+      bottom: calc(12px + var(--safe-bottom));
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 60;
+      background: var(--surface-elevated);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-pill);
+      padding: 6px 8px;
+      box-shadow: var(--shadow-md);
+      gap: 4px;
+      max-width: calc(100vw - 24px);
+    }
+
+    .mobile-dock a {
+      text-decoration: none;
+      color: var(--text-soft);
+      font-size: 0.76rem;
+      font-weight: 700;
+      padding: 8px 12px;
+      border-radius: var(--radius-pill);
+      white-space: nowrap;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      transition: background 0.2s ease, color 0.2s ease;
+    }
+
+    .mobile-dock a:active,
+    .mobile-dock a.active {
+      background: var(--accent-soft);
+      color: var(--accent);
+    }
+
+    /* Container */
+    .container {
+      position: relative;
+      z-index: 2;
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 28px 18px calc(105px + var(--safe-bottom));
+    }
+
+    /* Hero Section */
+    .hero {
+      text-align: center;
+      padding: 28px 6px 24px;
+    }
+
+    .status-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      padding: 7px 15px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      border: 1px solid var(--border-strong);
+      color: var(--accent);
+      font-size: 0.76rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      margin-bottom: 18px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.05rem, 6.5vw, 4.05rem);
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      line-height: 1.08;
+      margin-bottom: 16px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(125deg, var(--accent) 0%, var(--accent-2) 52%, var(--accent-3) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .hero-sub {
+      max-width: 620px;
+      margin: 0 auto 26px;
+      font-size: clamp(0.96rem, 2.5vw, 1.14rem);
+      color: var(--text-soft);
+      line-height: 1.58;
+    }
+
+    /* Live Timer Card */
+    .timer-card {
+      max-width: 720px;
+      margin: 0 auto 16px;
+      padding: 24px 18px 18px;
+      background: var(--surface);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      box-shadow: var(--shadow-md);
+      position: relative;
+      overflow: hidden;
+    }
+
+    .timer-label {
+      font-size: 0.78rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 14px;
+    }
+
+    .timer-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 9px;
+    }
+
+    .time-box {
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 13px 6px;
+    }
+
+    .time-val {
+      font-size: clamp(1.55rem, 5vw, 2.5rem);
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      font-variant-numeric: tabular-nums;
+      color: var(--text);
+      line-height: 1.1;
+    }
+
+    .time-box.highlight .time-val {
+      color: var(--accent);
+    }
+
+    .time-unit {
+      font-size: 0.73rem;
+      font-weight: 650;
+      color: var(--text-muted);
+      margin-top: 4px;
+    }
+
+    .timer-foot {
+      margin-top: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+      font-size: 0.81rem;
+      color: var(--text-soft);
+    }
+
+    .tiny-link-btn {
+      background: none;
+      border: none;
+      color: var(--accent);
+      font-size: 0.81rem;
+      font-weight: 650;
+      cursor: pointer;
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      padding: 4px 6px;
+    }
+
+    /* Time Adjuster Popover — 16px font prevents iPhone auto-zoom! */
+    .time-editor {
+      display: none;
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px dashed var(--border-strong);
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+
+    .time-editor.open {
+      display: flex;
+    }
+
+    .time-editor input {
+      padding: 10px 12px;
+      border-radius: 12px;
+      border: 1px solid var(--border-strong);
+      background: var(--surface-solid);
+      color: var(--text);
+      font-size: 16px;
+      font-family: inherit;
+      max-width: 100%;
+    }
+
+    /* Section Headers */
+    .section {
+      margin-top: 48px;
+      scroll-margin-top: 84px;
+    }
+
+    .section-head {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 20px;
+    }
+
+    .section-tag {
+      font-size: 0.76rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+
+    .section-title {
+      font-size: clamp(1.48rem, 4vw, 2.15rem);
+      font-weight: 820;
+      letter-spacing: -0.03em;
+      line-height: 1.16;
+    }
+
+    .section-desc {
+      color: var(--text-soft);
+      font-size: 0.95rem;
+    }
+
+    /* Bento Grid */
+    .bento-grid {
+      display: grid;
+      grid-template-columns: repeat(12, 1fr);
+      gap: 16px;
+    }
+
+    .bento-card {
+      background: var(--surface);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .col-7 { grid-column: span 7; }
+    .col-5 { grid-column: span 5; }
+    .col-6 { grid-column: span 6; }
+
+    .card-kicker {
+      font-size: 0.74rem;
+      font-weight: 750;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      margin-bottom: 7px;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 8px;
+      line-height: 1.25;
+    }
+
+    .card-text {
+      font-size: 0.92rem;
+      color: var(--text-soft);
+      line-height: 1.55;
+    }
+
+    /* Sympathy Chart */
+    .chart-wrap {
+      margin: 16px 0 14px;
+      padding: 14px 12px 10px;
+      border-radius: var(--radius-md);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+    }
+
+    .chart-bars {
+      display: flex;
+      align-items: flex-end;
+      gap: 8px;
+      height: 88px;
+    }
+
+    .bar-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 6px;
+      height: 100%;
+      justify-content: flex-end;
+      min-width: 0;
+    }
+
+    .bar-fill {
+      width: 100%;
+      border-radius: 8px 8px 4px 4px;
+      background: var(--accent-soft);
+      transition: height 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .bar-fill.active {
+      background: linear-gradient(180deg, var(--accent) 0%, var(--accent-2) 100%);
+      box-shadow: 0 6px 16px -4px rgba(255, 59, 127, 0.45);
+    }
+
+    .bar-lbl {
+      font-size: 0.68rem;
+      font-weight: 650;
+      color: var(--text-muted);
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+
+    /* Tactile iOS-friendly Buttons (44px+ hit height) */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      min-height: 46px;
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      font-family: inherit;
+      font-size: 0.93rem;
+      font-weight: 750;
+      border: none;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.2s ease, background 0.2s ease;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .btn:active {
+      transform: scale(0.95) !important;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%);
+      color: #fff;
+      box-shadow: var(--shadow-glow);
+    }
+
+    .btn-soft {
+      background: var(--accent-soft);
+      color: var(--accent);
+      border: 1px solid var(--border-strong);
+    }
+
+    .btn-ghost {
+      background: var(--surface-solid);
+      color: var(--text);
+      border: 1px solid var(--border-strong);
+    }
+
+    .smile-meter {
+      font-size: 2.35rem;
+      font-weight: 850;
+      letter-spacing: -0.04em;
+      color: var(--accent);
+      margin: 8px 0 6px;
+    }
+
+    /* Locked Toggle Switch */
+    .toggle-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      margin-top: 14px;
+      border-radius: var(--radius-md);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .toggle-pill {
+      width: 52px;
+      height: 30px;
+      border-radius: var(--radius-pill);
+      background: linear-gradient(135deg, var(--accent), var(--accent-2));
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .toggle-knob {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: #fff;
+      position: absolute;
+      top: 3px;
+      right: 3px;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.22);
+      transition: right 0.18s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .toggle-pill.shake .toggle-knob {
+      right: 20px;
+    }
+
+    /* Compliment Generator Box */
+    .compliment-box {
+      margin: 14px 0;
+      padding: 16px;
+      min-height: 102px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      border-radius: var(--radius-md);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      font-size: 0.98rem;
+      font-weight: 650;
+      color: var(--text);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    /* ============================================================
+       MINI-GAME SECTION (iPhone Scroll-Safe + Thumb Track!)
+       ============================================================ */
+    .game-wrapper {
+      background: var(--surface);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-xl);
+      padding: 20px;
+      box-shadow: var(--shadow-md);
+    }
+
+    .game-hud {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .hud-pills {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+
+    .hud-pill {
+      padding: 7px 13px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+      font-size: 0.86rem;
+      font-weight: 750;
+      font-variant-numeric: tabular-nums;
+    }
+
+    .hud-pill span {
+      color: var(--accent);
+    }
+
+    /* pan-y when idle so iPhone vertical page scrolling NEVER gets stuck! */
+    .game-stage {
+      position: relative;
+      width: 100%;
+      height: 340px;
+      border-radius: var(--radius-lg);
+      background: radial-gradient(circle at 50% 18%, var(--bg-alt), var(--surface-solid));
+      border: 1px solid var(--border);
+      overflow: hidden;
+      touch-action: pan-y;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .game-stage.playing {
+      touch-action: none;
+    }
+
+    #game-canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+      cursor: pointer;
+    }
+
+    .thumb-hint-bar {
+      margin-top: 10px;
+      padding: 9px 14px;
+      border-radius: var(--radius-pill);
+      background: var(--bg-alt);
+      border: 1px dashed var(--border-strong);
+      text-align: center;
+      font-size: 0.8rem;
+      font-weight: 650;
+      color: var(--text-soft);
+      touch-action: none;
+      user-select: none;
+      -webkit-user-select: none;
+    }
+
+    .game-overlay {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      background: rgba(255, 249, 251, 0.86);
+      backdrop-filter: blur(8px);
+      -webkit-backdrop-filter: blur(8px);
+      transition: opacity 0.25s ease;
+    }
+
+    [data-theme="dark"] .game-overlay {
+      background: rgba(14, 10, 20, 0.86);
+    }
+
+    .game-overlay.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .game-overlay h3 {
+      font-size: 1.35rem;
+      font-weight: 820;
+      margin-bottom: 6px;
+      letter-spacing: -0.02em;
+    }
+
+    .game-overlay p {
+      max-width: 420px;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      margin-bottom: 14px;
+    }
+
+    .game-legend {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: center;
+      margin-bottom: 16px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--text-soft);
+    }
+
+    .game-legend span {
+      padding: 5px 10px;
+      border-radius: var(--radius-pill);
+      background: var(--surface-solid);
+      border: 1px solid var(--border);
+    }
+
+    /* ============================================================
+       COUPONS GRID
+       ============================================================ */
+    .coupons-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 16px;
+    }
+
+    .coupon {
+      position: relative;
+      background: var(--surface-solid);
+      border: 1px solid var(--border-strong);
+      border-radius: 20px;
+      padding: 22px 20px 18px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+    }
+
+    .coupon::before,
+    .coupon::after {
+      content: "";
+      position: absolute;
+      top: 66%;
+      width: 20px;
+      height: 20px;
+      border-radius: 50%;
+      background: var(--bg);
+      border: 1px solid var(--border-strong);
+      z-index: 2;
+    }
+
+    .coupon::before { left: -11px; }
+    .coupon::after { right: -11px; }
+
+    .coupon-top {
+      display: flex;
+      align-items: flex-start;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+
+    .coupon-emoji {
+      width: 48px;
+      height: 48px;
+      border-radius: 14px;
+      background: var(--accent-soft);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
+
+    .coupon-code {
+      font-size: 0.72rem;
+      font-weight: 750;
+      letter-spacing: 0.06em;
+      color: var(--text-muted);
+      padding: 4px 9px;
+      border-radius: var(--radius-pill);
+      border: 1px solid var(--border);
+    }
+
+    .coupon h4 {
+      font-size: 1.1rem;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 6px;
+    }
+
+    .coupon p {
+      font-size: 0.88rem;
+      color: var(--text-soft);
+      margin-bottom: 18px;
+      line-height: 1.5;
+    }
+
+    .coupon-divider {
+      border-top: 1.5px dashed var(--border-strong);
+      margin: 0 -20px 14px;
+    }
+
+    .coupon.gold {
+      background: linear-gradient(145deg, var(--surface-solid), var(--gold-soft));
+      border-color: rgba(245, 158, 11, 0.45);
+    }
+
+    .coupon.gold .coupon-emoji {
+      background: var(--gold-soft);
+    }
+
+    .coupon-lock {
+      position: absolute;
+      inset: 0;
+      z-index: 5;
+      background: rgba(255, 249, 251, 0.88);
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      cursor: pointer;
+      user-select: none;
+      -webkit-user-select: none;
+      transition: opacity 0.35s ease;
+    }
+
+    [data-theme="dark"] .coupon-lock {
+      background: rgba(20, 14, 30, 0.90);
+    }
+
+    .coupon-lock.unlocked {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .stamp-badge {
+      display: none;
+      position: absolute;
+      top: 16px;
+      right: 14px;
+      padding: 5px 10px;
+      border: 2px solid var(--mint);
+      color: var(--mint);
+      border-radius: 8px;
+      font-size: 0.7rem;
+      font-weight: 850;
+      letter-spacing: 0.08em;
+      transform: rotate(8deg);
+      background: var(--surface-solid);
+      z-index: 3;
+    }
+
+    .coupon.redeemed .stamp-badge {
+      display: inline-block;
+      animation: stampPop 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes stampPop {
+      from { transform: scale(1.8) rotate(18deg); opacity: 0; }
+      to { transform: scale(1) rotate(8deg); opacity: 1; }
+    }
+
+    /* Roadmap */
+    .roadmap {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 14px;
+    }
+
+    .step-card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 18px;
+    }
+
+    .step-card.current {
+      border-color: var(--accent);
+      background: linear-gradient(160deg, var(--surface-solid), var(--accent-soft));
+      box-shadow: var(--shadow-sm);
+    }
+
+    .step-day {
+      font-size: 0.74rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      color: var(--accent);
+      margin-bottom: 6px;
+    }
+
+    .step-card h5 {
+      font-size: 0.98rem;
+      font-weight: 780;
+      margin-bottom: 5px;
+    }
+
+    .step-card p {
+      font-size: 0.84rem;
+      color: var(--text-soft);
+    }
+
+    /* ============================================================
+       GRAND FINALE: COLLISION-FREE IPHONE RUNAWAY ARENA
+       ============================================================ */
+    .finale-card {
+      margin-top: 52px;
+      padding: 36px 18px 32px;
+      border-radius: var(--radius-xl);
+      background: var(--surface);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border: 1.5px solid var(--border-strong);
+      box-shadow: var(--shadow-md);
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+      scroll-margin-top: 84px;
+    }
+
+    .finale-emoji {
+      font-size: 2.8rem;
+      margin-bottom: 10px;
+      display: inline-block;
+      animation: heartbeat 1.8s infinite ease-in-out;
+    }
+
+    @keyframes heartbeat {
+      0%, 100% { transform: scale(1); }
+      25% { transform: scale(1.14); }
+      45% { transform: scale(0.98); }
+      65% { transform: scale(1.09); }
+    }
+
+    .finale-card h2 {
+      font-size: clamp(1.5rem, 4.5vw, 2.45rem);
+      font-weight: 850;
+      letter-spacing: -0.03em;
+      max-width: 620px;
+      margin: 0 auto 10px;
+      line-height: 1.16;
+    }
+
+    .finale-sub {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      max-width: 500px;
+      margin: 0 auto 22px;
+    }
+
+    .runaway-arena {
+      position: relative;
+      width: 100%;
+      max-width: 580px;
+      height: 240px;
+      margin: 0 auto;
+      border-radius: var(--radius-lg);
+      border: 1px dashed var(--border-strong);
+      background: var(--bg-alt);
+      overflow: hidden;
+      touch-action: manipulation;
+    }
+
+    /* Stable slot for YES so it never jumps when NO runs away! */
+    .yes-anchor {
+      position: absolute;
+      top: 34px;
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: 4;
+    }
+
+    #btn-yes {
+      font-size: 1.04rem;
+      padding: 15px 30px;
+      white-space: nowrap;
+      transition: transform 0.24s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.24s ease;
+    }
+
+    #btn-no {
+      position: absolute;
+      left: 50%;
+      top: 138px;
+      transform: translateX(-50%);
+      font-size: 0.92rem;
+      padding: 12px 20px;
+      z-index: 5;
+      white-space: nowrap;
+      transition: left 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), top 0.22s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    .escape-puff {
+      position: absolute;
+      pointer-events: none;
+      font-size: 1.25rem;
+      z-index: 3;
+      animation: puffOut 0.55s ease forwards;
+    }
+
+    @keyframes puffOut {
+      0% { opacity: 1; transform: translate(-50%, -50%) scale(0.7); }
+      100% { opacity: 0; transform: translate(-50%, -120%) scale(1.35); }
+    }
+
+    .dodge-status {
+      margin-top: 12px;
+      min-height: 22px;
+      font-size: 0.85rem;
+      font-weight: 650;
+      color: var(--accent);
+      padding: 0 8px;
+    }
+
+    /* Certificate Reveal */
+    .certificate {
+      display: none;
+      max-width: 580px;
+      margin: 8px auto 0;
+      padding: 26px 20px;
+      border-radius: var(--radius-lg);
+      background: var(--surface-solid);
+      border: 2px solid var(--accent);
+      box-shadow: var(--shadow-glow);
+    }
+
+    .certificate.visible {
+      display: block;
+      animation: certPop 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    @keyframes certPop {
+      from { opacity: 0; transform: translateY(12px) scale(0.95); }
+      to { opacity: 1; transform: translateY(0) scale(1); }
+    }
+
+    .cert-badge {
+      display: inline-block;
+      padding: 5px 13px;
+      border-radius: var(--radius-pill);
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      margin-bottom: 12px;
+    }
+
+    .certificate h3 {
+      font-size: 1.42rem;
+      font-weight: 850;
+      margin-bottom: 10px;
+    }
+
+    .certificate p {
+      color: var(--text-soft);
+      font-size: 0.94rem;
+      margin-bottom: 18px;
+      line-height: 1.58;
+    }
+
+    /* Toast Notification (above iPhone bottom dock & safe-area) */
+    .toast {
+      position: fixed;
+      bottom: calc(76px + var(--safe-bottom));
+      left: 50%;
+      transform: translateX(-50%) translateY(110px);
+      background: var(--text);
+      color: var(--bg);
+      padding: 12px 20px;
+      border-radius: var(--radius-pill);
+      font-size: 0.86rem;
+      font-weight: 700;
+      box-shadow: 0 14px 32px rgba(0,0,0,0.28);
+      z-index: 1000;
+      opacity: 0;
+      transition: transform 0.32s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease;
+      width: max-content;
+      max-width: calc(100vw - 32px);
+      text-align: center;
+      pointer-events: none;
+    }
+
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 46px;
+      color: var(--text-muted);
+      font-size: 0.82rem;
+    }
+
+    /* Responsive Breakpoints (iPhone SE 375px -> iPhone 16 Pro Max 430px -> iPad -> Desktop) */
+    @media (max-width: 820px) {
+      .col-7, .col-5, .col-6 {
+        grid-column: span 12;
+      }
+      .roadmap {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      .nav-links {
+        display: none;
+      }
+      .mobile-dock {
+        display: flex;
+      }
+    }
+
+    @media (max-width: 520px) {
+      .container {
+        padding: 16px 14px calc(108px + var(--safe-bottom));
+      }
+      .hero {
+        padding: 18px 2px 18px;
+      }
+      .timer-card {
+        padding: 20px 12px 16px;
+      }
+      .timer-grid {
+        gap: 6px;
+      }
+      .time-box {
+        padding: 11px 4px;
+      }
+      .bento-card {
+        padding: 18px;
+      }
+      .game-wrapper {
+        padding: 14px;
+      }
+      .game-stage {
+        height: 300px;
+      }
+      .coupons-grid {
+        grid-template-columns: 1fr;
+      }
+      .roadmap {
+        grid-template-columns: 1fr;
+      }
+      .runaway-arena {
+        height: 265px;
+      }
+    }
+  </style>
+</head>
+<body class="locked-intro">
+  <!-- INTRO ENVELOPE SPLASH (Warms up iPhone Safari Audio + Magical Opening) -->
+  <div class="intro-screen" id="intro-screen">
+    <div class="envelope-card">
+      <div class="envelope-seal">💌</div>
+      <span class="envelope-tag">Секретная доставка • День №2</span>
+      <h2>Лично в руки для Миланы</h2>
+      <p>
+        Я собрал маленький интерактивный мир в честь наших первых двух дней. Включай улыбку и нажимай кнопку ниже ✨
+      </p>
+      <button class="btn btn-primary open-btn" id="open-envelope-btn">Открыть сюрприз 💖</button>
+    </div>
+  </div>
+
+  <div class="ambient-bg">
+    <div class="blob blob-1"></div>
+    <div class="blob blob-2"></div>
+    <div class="blob blob-3"></div>
+  </div>
+
+  <canvas id="fx-canvas"></canvas>
+
+  <!-- Sticky Navigation -->
+  <div class="nav-wrap">
+    <nav class="navbar">
+      <a href="#" class="brand">
+        <span class="live-dot"></span>
+        <span>Милана × День 2</span>
+      </a>
+      <div class="nav-links">
+        <a href="#analytics">Аналитика</a>
+        <a href="#minigame">Мини-игра</a>
+        <a href="#coupons">Купоны</a>
+        <a href="#question">Главный вопрос</a>
+      </div>
+      <div class="nav-actions">
+        <button class="icon-btn" id="sound-btn" title="Звуковые эффекты" aria-label="Звук">🔊</button>
+        <button class="icon-btn" id="theme-btn" title="Сменить тему" aria-label="Тема">🌙</button>
+      </div>
+    </nav>
+  </div>
+
+  <!-- iPhone Floating Bottom Quick-Nav Dock -->
+  <nav class="mobile-dock" aria-label="Быстрая навигация">
+    <a href="#analytics">📊 Факты</a>
+    <a href="#minigame">🎮 Игра</a>
+    <a href="#coupons">🎟️ Купоны</a>
+    <a href="#question">💌 Вопрос</a>
+  </nav>
+
+  <main class="container">
+    <!-- HERO -->
+    <section class="hero">
+      <div class="status-pill">✨ Официальный статус: целых 48 часов вместе</div>
+      <h1>
+        Милана, это наш первый<br />
+        <span class="gradient-text">персональный сайт</span>
+      </h1>
+      <p class="hero-sub">
+        Кто-то на второй день отношений дарит шоколадку, а я решил запустить целый интерактивный портал в твою честь. Потому что даже два дня с тобой — уже мой любимый сюжет.
+      </p>
+
+      <!-- Live Chronometer -->
+      <div class="timer-card">
+        <div class="timer-label">⏱️ Хронометр наших «очень серьёзных» отношений</div>
+        <div class="timer-grid">
+          <div class="time-box highlight">
+            <div class="time-val" id="t-days">2</div>
+            <div class="time-unit" id="u-days">дня</div>
+          </div>
+          <div class="time-box">
+            <div class="time-val" id="t-hours">04</div>
+            <div class="time-unit">часов</div>
+          </div>
+          <div class="time-box">
+            <div class="time-val" id="t-mins">18</div>
+            <div class="time-unit">минут</div>
+          </div>
+          <div class="time-box">
+            <div class="time-val" id="t-secs">42</div>
+            <div class="time-unit">секунд</div>
+          </div>
+        </div>
+        <div class="timer-foot">
+          <span>И каждая секунда — в самое сердечко 💗</span>
+          <button class="tiny-link-btn" id="edit-time-toggle">✎ настроить точный час</button>
+        </div>
+        <div class="time-editor" id="time-editor">
+          <input type="datetime-local" id="start-datetime" />
+          <button class="btn btn-soft" id="save-time-btn" style="min-height:40px; padding:8px 14px; font-size:0.84rem;">Сохранить</button>
+          <button class="btn btn-ghost" id="copy-link-btn" style="min-height:40px; padding:8px 14px; font-size:0.84rem;">Ссылка с этим часом 🔗</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- BENTO ANALYTICS -->
+    <section class="section" id="analytics">
+      <div class="section-head">
+        <span class="section-tag">Отчёт за 48 часов</span>
+        <h2 class="section-title">Сухая научная аналитика о нас</h2>
+        <p class="section-desc">Цифры не врут — я проверил дважды (и оба раза засмотрелся на твоё фото).</p>
+      </div>
+
+      <div class="bento-grid">
+        <!-- Card 1: Chart -->
+        <div class="bento-card col-7">
+          <div>
+            <div class="card-kicker">Динамика мыслей в голове</div>
+            <h3 class="card-title">Уровень симпатии к Милане: <span id="sympathy-val" style="color:var(--accent)">999%</span></h3>
+            <p class="card-text">График показывает, о чём я думал до старта наших двух дней и что творится в моей голове сейчас.</p>
+            <div class="chart-wrap">
+              <div class="chart-bars">
+                <div class="bar-col">
+                  <div class="bar-fill" style="height: 22%;"></div>
+                  <span class="bar-lbl">Раньше</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-fill" style="height: 46%;"></div>
+                  <span class="bar-lbl">Искра ✨</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-fill active" style="height: 82%;"></div>
+                  <span class="bar-lbl">День 1</span>
+                </div>
+                <div class="bar-col">
+                  <div class="bar-fill active" style="height: 100%;"></div>
+                  <span class="bar-lbl">День 2 💖</span>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div>
+            <button class="btn btn-soft" id="boost-btn" style="width: 100%;">⚡ Поднять ещё на +100%</button>
+          </div>
+        </div>
+
+        <!-- Card 2: Smile Detector -->
+        <div class="bento-card col-5">
+          <div>
+            <div class="card-kicker">Живой радар эмоций</div>
+            <h3 class="card-title">Детектор твоей улыбки</h3>
+            <div class="smile-meter" id="smile-percent">99.4%</div>
+            <p class="card-text" id="smile-desc">Именно с такой вероятностью ты прямо сейчас смотришь в экран айфона и хотя бы чуть-чуть улыбаешься.</p>
+          </div>
+          <div style="margin-top: 18px;">
+            <button class="btn btn-primary" id="smile-btn" style="width: 100%;">Признаюсь, улыбнулась 😊</button>
+          </div>
+        </div>
+
+        <!-- Card 3: Unstoppable Toggle -->
+        <div class="bento-card col-6">
+          <div>
+            <div class="card-kicker">Настройки системы</div>
+            <h3 class="card-title">Тариф: сразу VIP без демо-версии</h3>
+            <p class="card-text">Попробуй ради интереса выключить тумблер ниже. Спойлер: у этой кнопки своё мнение.</p>
+          </div>
+          <div class="toggle-row" id="love-toggle">
+            <div>
+              <div style="font-weight: 750; font-size: 0.95rem;">Режим «Обожать Милану»</div>
+              <div style="font-size: 0.78rem; color: var(--text-muted);" id="toggle-hint">Включён по умолчанию и навсегда</div>
+            </div>
+            <div class="toggle-pill" id="toggle-pill">
+              <div class="toggle-knob"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Card 4: Compliment Generator -->
+        <div class="bento-card col-6">
+          <div>
+            <div class="card-kicker">На случай если заскучаешь</div>
+            <h3 class="card-title">Генератор фактов о Милане</h3>
+            <div class="compliment-box" id="compliment-text">
+              «Мы вместе всего два дня, а твои сообщения уже мои самые любимые уведомления на экране.»
+            </div>
+          </div>
+          <button class="btn btn-ghost" id="next-compliment-btn" style="width: 100%;">✨ Выдать ещё один факт</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- MINI GAME -->
+    <section class="section" id="minigame">
+      <div class="section-head">
+        <span class="section-tag">Интерактивный квест</span>
+        <h2 class="section-title">Мини-игра: «Поймай моё сердечко»</h2>
+        <p class="section-desc">Набери <strong>12 очков за 18 секунд</strong>, чтобы разблокировать секретный Золотой VIP-купон ниже!</p>
+      </div>
+
+      <div class="game-wrapper">
+        <div class="game-hud">
+          <div class="hud-pills">
+            <div class="hud-pill">Очки: <span id="game-score">0</span> / 12</div>
+            <div class="hud-pill">Время: <span id="game-time">18</span> сек</div>
+          </div>
+          <div style="font-size: 0.8rem; color: var(--text-muted); font-weight: 650;">
+            Тапай по сердечкам или лови подушечкой!
+          </div>
+        </div>
+
+        <div class="game-stage" id="game-stage">
+          <canvas id="game-canvas"></canvas>
+
+          <div class="game-overlay" id="game-overlay">
+            <div style="font-size: 2.5rem; margin-bottom: 6px;" id="overlay-icon">💘</div>
+            <h3 id="overlay-title">Проверим ловкость, Милана?</h3>
+            <p id="overlay-desc">Тапай пальцем прямо по сердечкам и кофе (или двигай ловушку), но не трогай будильники!</p>
+            <div class="game-legend">
+              <span>💖 +1 очко</span>
+              <span>💝 +3 супер</span>
+              <span>☕ +2 вайб</span>
+              <span>⏰ −1 будильник</span>
+            </div>
+            <button class="btn btn-primary" id="start-game-btn">Начать игру 🚀</button>
+          </div>
+        </div>
+
+        <div class="thumb-hint-bar" id="thumb-track">
+          ↔ Можно водить пальцем прямо по этой полоске, чтобы не закрывать экран
+        </div>
+      </div>
+    </section>
+
+    <!-- COUPONS -->
+    <section class="section" id="coupons">
+      <div class="section-head">
+        <span class="section-tag">Лимитированный выпуск</span>
+        <h2 class="section-title">Личные купоны для Миланы</h2>
+        <p class="section-desc">Активируй любой купон в один тап — можно сразу отправить его мне в Telegram или скопировать.</p>
+      </div>
+
+      <div class="coupons-grid">
+        <!-- Coupon 1 -->
+        <div class="coupon" data-code="#MILANA-01" data-title="Кофе или вкусняшка вне очереди ☕">
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">☕</div>
+              <span class="coupon-code">#MILANA-01</span>
+            </div>
+            <h4>Любой кофе или вкусняшка</h4>
+            <p>Экстренная доставка твоего любимого напитка или сладости за красивые глаза. Без срока давности.</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-soft redeem-btn" style="width:100%;">Активировать купон 🎟️</button>
+          </div>
+        </div>
+
+        <!-- Coupon 2 -->
+        <div class="coupon" data-code="#MILANA-02" data-title="Безлимитные обнимашки 🤗">
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">🤗</div>
+              <span class="coupon-code">#MILANA-02</span>
+            </div>
+            <h4>Безлимитные обнимашки</h4>
+            <p>VIP-тариф: тёплые объятия любой продолжительности при первой же встрече без предварительной записи.</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-soft redeem-btn" style="width:100%;">Активировать купон 🎟️</button>
+          </div>
+        </div>
+
+        <!-- Coupon 3 -->
+        <div class="coupon" data-code="#MILANA-03" data-title="Полная власть над выбором фильма 🎬">
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">🎬</div>
+              <span class="coupon-code">#MILANA-03</span>
+            </div>
+            <h4>100% власть над выбором кино</h4>
+            <p>Смотрим вообще всё, что выберешь ты. Обещаю не спорить и запасти самые вкусные снеки.</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-soft redeem-btn" style="width:100%;">Активировать купон 🎟️</button>
+          </div>
+        </div>
+
+        <!-- Coupon 4 -->
+        <div class="coupon" data-code="#MILANA-04" data-title="Вечерняя прогулка с нашим вайбом 🌙">
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">🌙</div>
+              <span class="coupon-code">#MILANA-04</span>
+            </div>
+            <h4>Идеальная вечерняя прогулка</h4>
+            <p>Классная музыка, ночные огни, разговоры обо всём на свете и я, который греет твои руки.</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-soft redeem-btn" style="width:100%;">Активировать купон 🎟️</button>
+          </div>
+        </div>
+
+        <!-- Coupon 5 -->
+        <div class="coupon" data-code="#MILANA-05" data-title="Спасение от «не знаю, чего хочу поесть» 🍕">
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">🍕</div>
+              <span class="coupon-code">#MILANA-05</span>
+            </div>
+            <h4>Спасение от голода 24/7</h4>
+            <p>Когда ты говоришь «я не знаю, что хочу», я сам угадываю идеальную еду и организую всё красиво.</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-soft redeem-btn" style="width:100%;">Активировать купон 🎟️</button>
+          </div>
+        </div>
+
+        <!-- Coupon 6: Secret Gold -->
+        <div class="coupon gold" id="gold-coupon" data-code="#MILANA-VIP" data-title="Золотой джокер: Исполнение одного каприза 👑">
+          <div class="coupon-lock" id="gold-lock">
+            <div style="font-size: 2.1rem; margin-bottom: 6px;">🔒✨</div>
+            <div style="font-weight: 800; font-size: 1rem; margin-bottom: 4px;">Секретный Золотой Купон</div>
+            <div style="font-size: 0.8rem; color: var(--text-soft);" id="lock-subtext">
+              Выиграй в мини-игре выше (12+ очков)<br/>или тапни сюда 5 раз по блату 😉
+            </div>
+          </div>
+          <span class="stamp-badge">АКТИВИРОВАНО ✓</span>
+          <div>
+            <div class="coupon-top">
+              <div class="coupon-emoji">👑</div>
+              <span class="coupon-code">#MILANA-VIP</span>
+            </div>
+            <h4>Золотой джокер: Любой каприз</h4>
+            <p>Эксклюзив для Миланы: одно твоё спонтанное желание или идея для свидания исполняется вне очереди!</p>
+          </div>
+          <div>
+            <div class="coupon-divider"></div>
+            <button class="btn btn-primary redeem-btn" style="width:100%;">Активировать VIP 👑</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ROADMAP -->
+    <section class="section">
+      <div class="section-head">
+        <span class="section-tag">Дорожная карта</span>
+        <h2 class="section-title">Наш грандиозный план</h2>
+      </div>
+      <div class="roadmap">
+        <div class="step-card">
+          <div class="step-day">День 1 ✓</div>
+          <h5>Официальный старт</h5>
+          <p>Точка отсчёта, первые мурашки и понимание, что это начало чего-то очень классного.</p>
+        </div>
+        <div class="step-card current">
+          <div class="step-day">День 2 • Сегодня</div>
+          <h5>Запуск сайта Миланы</h5>
+          <p>Первые 48 часов полёта пройдены успешно, улыбка на твоём лице зафиксирована!</p>
+        </div>
+        <div class="step-card">
+          <div class="step-day">День 3 →</div>
+          <h5>Новое свидание</h5>
+          <p>Обналичиваем купоны, пьём вкусный кофе и обнимаемся уже без экранов.</p>
+        </div>
+        <div class="step-card">
+          <div class="step-day">День 365+ ♾️</div>
+          <h5>Открыть этот сайт снова</h5>
+          <p>Пересмотреть, посмеяться над «целыми двумя днями» и порадоваться за нас.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRAND FINALE: RUNAWAY BUTTON -->
+    <section class="finale-card" id="question">
+      <div class="finale-emoji">💌</div>
+      <h2>Милана, пойдёшь со мной в наш 3-й день (и во все следующие)?</h2>
+      <p class="finale-sub" id="finale-sub">
+        Честное голосование: можешь смело нажимать любую из двух кнопок ниже 👀
+      </p>
+
+      <div class="runaway-arena" id="runaway-arena">
+        <div class="yes-anchor" id="yes-anchor">
+          <button class="btn btn-primary" id="btn-yes">Да, конечно! 💖</button>
+        </div>
+        <button class="btn btn-ghost" id="btn-no">Я подумаю / Нет 🙈</button>
+      </div>
+      <div class="dodge-status" id="dodge-status"></div>
+
+      <!-- Revealed after YES -->
+      <div class="certificate" id="certificate">
+        <span class="cert-badge">Подписка успешно продлена • День 2 → ∞</span>
+        <h3>Ура! Лучший ответ в мире 🥂💖</h3>
+        <p>
+          Официально задокументировано: <strong>Милана</strong> согласилась идти дальше! Обещаю делать каждый наш следующий день ещё теплее, веселее и интереснее, чем предыдущий.
+        </p>
+        <div style="display: flex; gap: 10px; justify-content: center; flex-wrap: wrap;">
+          <button class="btn btn-primary" id="send-yes-btn">Отправить ответ мне 💌</button>
+          <button class="btn btn-soft" id="more-confetti-btn">Ещё салют 🎉</button>
+        </div>
+      </div>
+    </section>
+
+    <footer>
+      Сделано с теплом и улыбкой специально для Миланы • День №2 💖
+    </footer>
+  </main>
+
+  <div class="toast" id="toast">Готово!</div>
+
+  <script>
+    // =========================================================================
+    // 0. SAFE STORAGE (Never crashes in iOS Safari Private / Telegram WebView / file://)
+    // =========================================================================
+    const memStore = {};
+    const safeStorage = {
+      get(key) {
+        try { return window.localStorage.getItem(key); } catch (_) { return memStore[key] || null; }
+      },
+      set(key, val) {
+        memStore[key] = String(val);
+        try { window.localStorage.setItem(key, String(val)); } catch (_) {}
+      }
+    };
+
+    // Universal Canvas Pill helper (Works on ALL iOS Safari versions)
+    function drawPill(ctx, x, y, w, h, r) {
+      const radius = Math.min(r, w / 2, h / 2);
+      ctx.beginPath();
+      ctx.moveTo(x + radius, y);
+      ctx.arcTo(x + w, y, x + w, y + h, radius);
+      ctx.arcTo(x + w, y + h, x, y + h, radius);
+      ctx.arcTo(x, y + h, x, y, radius);
+      ctx.arcTo(x, y, x + w, y, radius);
+      ctx.closePath();
+    }
+
+    // =========================================================================
+    // 1. iOS WEBKIT AUDIO ENGINE (Unlocks cleanly on Envelope Tap!)
+    // =========================================================================
+    let soundEnabled = true;
+    let audioCtx = null;
+    let audioUnlocked = false;
+
+    function unlockAudio() {
+      if (!soundEnabled) return null;
+      try {
+        const Ctx = window.AudioContext || window.webkitAudioContext;
+        if (!Ctx) return null;
+        if (!audioCtx) audioCtx = new Ctx();
+        if (audioCtx.state === 'suspended' || audioCtx.state === 'interrupted') {
+          audioCtx.resume();
+        }
+        if (!audioUnlocked && audioCtx) {
+          // 1-frame silent buffer wakes up iOS Safari WebAudio hardware pipeline
+          const buf = audioCtx.createBuffer(1, 1, 22050);
+          const src = audioCtx.createBufferSource();
+          src.buffer = buf;
+          src.connect(audioCtx.destination);
+          src.start(0);
+          audioUnlocked = true;
+        }
+      } catch (_) {}
+      return audioCtx;
+    }
+
+    ['touchstart', 'touchend', 'click'].forEach((evt) => {
+      window.addEventListener(evt, () => { if (!audioUnlocked) unlockAudio(); }, { once: true, passive: true });
+    });
+
+    function playTone(freq = 520, type = 'sine', duration = 0.11, vol = 0.08, slideTo = null) {
+      if (!soundEnabled) return;
+      const ctx = unlockAudio();
+      if (!ctx) return;
+      try {
+        const osc = ctx.createOscillator();
+        const gain = ctx.createGain();
+        osc.type = type;
+        osc.frequency.setValueAtTime(freq, ctx.currentTime);
+        if (slideTo) {
+          osc.frequency.exponentialRampToValueAtTime(slideTo, ctx.currentTime + duration);
+        }
+        gain.gain.setValueAtTime(vol, ctx.currentTime);
+        gain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + duration);
+        osc.connect(gain);
+        gain.connect(ctx.destination);
+        osc.start();
+        osc.stop(ctx.currentTime + duration);
+      } catch (_) {}
+    }
+
+    function playPop() { playTone(590, 'sine', 0.09, 0.08, 840); }
+    function playWinChord() {
+      [523.25, 659.25, 783.99, 1046.5].forEach((f, idx) => {
+        setTimeout(() => playTone(f, 'triangle', 0.24, 0.09), idx * 70);
+      });
+    }
+    function playDodge() { playTone(430, 'sine', 0.12, 0.07, 250); }
+    function playBad() { playTone(220, 'sawtooth', 0.14, 0.05, 150); }
+
+    const soundBtn = document.getElementById('sound-btn');
+    soundBtn.addEventListener('click', () => {
+      soundEnabled = !soundEnabled;
+      soundBtn.textContent = soundEnabled ? '🔊' : '🔇';
+      if (soundEnabled) playPop();
+      showToast(soundEnabled ? 'Звуковые эффекты включены 🔊' : 'Звук выключен 🔇');
+    });
+
+    // =========================================================================
+    // 2. INTRO ENVELOPE OPEN HANDLER
+    // =========================================================================
+    const introScreen = document.getElementById('intro-screen');
+    document.getElementById('open-envelope-btn').addEventListener('click', (e) => {
+      unlockAudio();
+      playWinChord();
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnHeartsBurst(rect.left + rect.width / 2, rect.top + rect.height / 2, 42);
+      introScreen.classList.add('opened');
+      document.body.classList.remove('locked-intro');
+      setTimeout(() => { introScreen.style.display = 'none'; }, 600);
+    });
+
+    // =========================================================================
+    // 3. THEME SWITCHER + iPhone Safari Status Bar Color Sync
+    // =========================================================================
+    const themeBtn = document.getElementById('theme-btn');
+    const metaTheme = document.getElementById('meta-theme-color');
+
+    function applyTheme(mode) {
+      document.documentElement.setAttribute('data-theme', mode);
+      themeBtn.textContent = mode === 'dark' ? '☀️' : '🌙';
+      if (metaTheme) metaTheme.setAttribute('content', mode === 'dark' ? '#0e0a14' : '#fff9fb');
+      safeStorage.set('milana_theme', mode);
+    }
+
+    if (safeStorage.get('milana_theme') === 'dark') {
+      applyTheme('dark');
+    }
+
+    themeBtn.addEventListener('click', () => {
+      const current = document.documentElement.getAttribute('data-theme');
+      applyTheme(current === 'dark' ? 'light' : 'dark');
+      playPop();
+    });
+
+    // =========================================================================
+    // 4. TOAST, CLIPBOARD & NATIVE iOS SHARE SHEET
+    // =========================================================================
+    const toastEl = document.getElementById('toast');
+    let toastTimer = null;
+    function showToast(msg) {
+      toastEl.textContent = msg;
+      toastEl.classList.add('show');
+      clearTimeout(toastTimer);
+      toastTimer = setTimeout(() => toastEl.classList.remove('show'), 3200);
+    }
+
+    async function copyText(text, successMsg) {
+      let copied = false;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        try {
+          await navigator.clipboard.writeText(text);
+          copied = true;
+        } catch (_) {}
+      }
+      if (!copied) {
+        try {
+          const ta = document.createElement('textarea');
+          ta.value = text;
+          ta.setAttribute('readonly', '');
+          ta.style.position = 'fixed';
+          ta.style.opacity = '0';
+          document.body.appendChild(ta);
+          ta.focus();
+          ta.select();
+          ta.setSelectionRange(0, ta.value.length);
+          document.execCommand('copy');
+          ta.remove();
+        } catch (_) {}
+      }
+      if (successMsg) showToast(successMsg);
+    }
+
+    async function shareOrCopy(text, copyToastMsg) {
+      await copyText(text, null);
+      const isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+      if (isMobile && navigator.share) {
+        try {
+          await navigator.share({ text });
+          showToast('Отправлено! 💌');
+          return;
+        } catch (_) {
+          // User dismissed share sheet — text is already in clipboard!
+        }
+      }
+      showToast(copyToastMsg);
+    }
+
+    // =========================================================================
+    // 5. CONFETTI & FLOATING HEARTS CANVAS ENGINE (Retina DPR Crisp)
+    // =========================================================================
+    const fxCanvas = document.getElementById('fx-canvas');
+    const fxCtx = fxCanvas.getContext('2d');
+    let particles = [];
+    let fxW = window.innerWidth;
+    let fxH = window.innerHeight;
+
+    function resizeFx() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      fxW = window.innerWidth;
+      fxH = window.innerHeight;
+      fxCanvas.width = fxW * dpr;
+      fxCanvas.height = fxH * dpr;
+      fxCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+    }
+    window.addEventListener('resize', resizeFx);
+    resizeFx();
+
+    function spawnHeartsBurst(x, y, count = 26) {
+      const colors = ['#ff3b7f', '#ff7a59', '#a855f7', '#fbbf24', '#fb7185'];
+      for (let i = 0; i < count; i++) {
+        const angle = (Math.PI * 2 * i) / count + (Math.random() - 0.5) * 0.5;
+        const speed = 2.8 + Math.random() * 6.2;
+        particles.push({
+          x,
+          y,
+          vx: Math.cos(angle) * speed,
+          vy: Math.sin(angle) * speed - 2.4,
+          size: 8 + Math.random() * 10,
+          color: colors[Math.floor(Math.random() * colors.length)],
+          alpha: 1,
+          rot: Math.random() * Math.PI,
+          vrot: (Math.random() - 0.5) * 0.16,
+          heart: Math.random() > 0.30
+        });
+      }
+    }
+
+    function drawHeartShape(ctx, size) {
+      ctx.beginPath();
+      const s = size * 0.5;
+      ctx.moveTo(0, s * 0.4);
+      ctx.bezierCurveTo(0, -s * 0.4, -s, -s * 0.4, -s, s * 0.2);
+      ctx.bezierCurveTo(-s, s * 0.8, 0, s * 1.15, 0, s * 1.45);
+      ctx.bezierCurveTo(0, s * 1.15, s, s * 0.8, s, s * 0.2);
+      ctx.bezierCurveTo(s, -s * 0.4, 0, -s * 0.4, 0, s * 0.4);
+      ctx.closePath();
+      ctx.fill();
+    }
+
+    function animateFx() {
+      fxCtx.clearRect(0, 0, fxW, fxH);
+      for (let i = particles.length - 1; i >= 0; i--) {
+        const p = particles[i];
+        p.x += p.vx;
+        p.y += p.vy;
+        p.vy += 0.16;
+        p.vx *= 0.985;
+        p.rot += p.vrot;
+        p.alpha -= 0.015;
+        if (p.alpha <= 0) {
+          particles.splice(i, 1);
+          continue;
+        }
+        fxCtx.save();
+        fxCtx.globalAlpha = Math.max(0, p.alpha);
+        fxCtx.translate(p.x, p.y);
+        fxCtx.rotate(p.rot);
+        fxCtx.fillStyle = p.color;
+        if (p.heart) {
+          drawHeartShape(fxCtx, p.size);
+        } else {
+          fxCtx.fillRect(-p.size * 0.4, -p.size * 0.25, p.size * 0.8, p.size * 0.5);
+        }
+        fxCtx.restore();
+      }
+      requestAnimationFrame(animateFx);
+    }
+    animateFx();
+
+    // =========================================================================
+    // 6. LIVE RELATIONSHIP TIMER
+    // =========================================================================
+    function getInitialStartDate() {
+      try {
+        const params = new URLSearchParams(window.location.search);
+        const urlSince = params.get('since');
+        if (urlSince) {
+          const parsed = new Date(urlSince);
+          if (!isNaN(parsed.getTime())) return parsed;
+        }
+      } catch (_) {}
+      const saved = safeStorage.get('milana_start_ts');
+      if (saved && !isNaN(Number(saved))) {
+        return new Date(Number(saved));
+      }
+      const now = new Date();
+      return new Date(now.getFullYear(), now.getMonth(), now.getDate() - 2, 0, 5, 0);
+    }
+
+    let startDate = getInitialStartDate();
+
+    function pluralDays(n) {
+      const mod10 = n % 10;
+      const mod100 = n % 100;
+      if (mod10 === 1 && mod100 !== 11) return 'день';
+      if (mod10 >= 2 && mod10 <= 4 && (mod100 < 12 || mod100 > 14)) return 'дня';
+      return 'дней';
+    }
+
+    const elDays = document.getElementById('t-days');
+    const elUDays = document.getElementById('u-days');
+    const elHours = document.getElementById('t-hours');
+    const elMins = document.getElementById('t-mins');
+    const elSecs = document.getElementById('t-secs');
+
+    function updateTimer() {
+      const diff = Math.max(0, Date.now() - startDate.getTime());
+      const totalSec = Math.floor(diff / 1000);
+      const days = Math.floor(totalSec / 86400);
+      const hours = Math.floor((totalSec % 86400) / 3600);
+      const mins = Math.floor((totalSec % 3600) / 60);
+      const secs = totalSec % 60;
+
+      elDays.textContent = days;
+      elUDays.textContent = pluralDays(days);
+      elHours.textContent = String(hours).padStart(2, '0');
+      elMins.textContent = String(mins).padStart(2, '0');
+      elSecs.textContent = String(secs).padStart(2, '0');
+    }
+    updateTimer();
+    setInterval(updateTimer, 1000);
+
+    const editToggle = document.getElementById('edit-time-toggle');
+    const timeEditor = document.getElementById('time-editor');
+    const startInput = document.getElementById('start-datetime');
+
+    function toLocalInputValue(d) {
+      const pad = (n) => String(n).padStart(2, '0');
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    }
+
+    editToggle.addEventListener('click', () => {
+      startInput.value = toLocalInputValue(startDate);
+      timeEditor.classList.toggle('open');
+      playPop();
+    });
+
+    document.getElementById('save-time-btn').addEventListener('click', () => {
+      if (startInput.value) {
+        const parsed = new Date(startInput.value);
+        if (!isNaN(parsed.getTime())) {
+          startDate = parsed;
+          safeStorage.set('milana_start_ts', startDate.getTime());
+          updateTimer();
+          timeEditor.classList.remove('open');
+          playPop();
+          showToast('Точное время старта сохранено! ⏱️');
+        }
+      }
+    });
+
+    document.getElementById('copy-link-btn').addEventListener('click', () => {
+      if (startInput.value) {
+        const parsed = new Date(startInput.value);
+        if (!isNaN(parsed.getTime())) {
+          startDate = parsed;
+          safeStorage.set('milana_start_ts', startDate.getTime());
+          updateTimer();
+        }
+      }
+      try {
+        const url = new URL(window.location.href);
+        url.searchParams.set('since', toLocalInputValue(startDate));
+        copyText(url.toString(), 'Ссылка с вашей точной датой скопирована! 🔗');
+      } catch (_) {
+        copyText(`?since=${toLocalInputValue(startDate)}`, 'Параметр времени скопирован!');
+      }
+      playPop();
+    });
+
+    // =========================================================================
+    // 7. BENTO INTERACTIONS
+    // =========================================================================
+    let sympathyScore = 999;
+    document.getElementById('boost-btn').addEventListener('click', (e) => {
+      sympathyScore += 100;
+      document.getElementById('sympathy-val').textContent = sympathyScore + '%';
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnHeartsBurst(rect.left + rect.width / 2, rect.top, 18);
+      playPop();
+    });
+
+    const smileBtn = document.getElementById('smile-btn');
+    let smiled = false;
+    smileBtn.addEventListener('click', (e) => {
+      const rect = e.currentTarget.getBoundingClientRect();
+      spawnHeartsBurst(rect.left + rect.width / 2, rect.top, 26);
+      playWinChord();
+      document.getElementById('smile-percent').textContent = '100% 💖';
+      document.getElementById('smile-desc').textContent = 'Знал же! Твоя улыбка официально сделала мой день в сто раз лучше.';
+      smileBtn.textContent = smiled ? 'Улыбаюсь снова 😊✨' : 'Зафиксировано в моём сердечке 💘';
+      smiled = true;
+    });
+
+    const loveToggle = document.getElementById('love-toggle');
+    const togglePill = document.getElementById('toggle-pill');
+    const toggleHint = document.getElementById('toggle-hint');
+    const toggleJokes = [
+      'Ошибка 403: функцию обожания Миланы отключить нельзя!',
+      'Хорошая попытка, но тумблер приклеен навсегда 😄',
+      'Система защиты: Милана слишком классная для выключения 💖',
+      'Отказ оборудования: режим милоты заблокирован на максимуме!'
+    ];
+    let jokeIdx = 0;
+    loveToggle.addEventListener('click', () => {
+      togglePill.classList.add('shake');
+      playDodge();
+      setTimeout(() => {
+        togglePill.classList.remove('shake');
+        playPop();
+      }, 210);
+      toggleHint.textContent = toggleJokes[jokeIdx % toggleJokes.length];
+      toggleHint.style.color = 'var(--accent)';
+      jokeIdx++;
+    });
+
+    const compliments = [
+      '«Мы вместе всего два дня, а твои сообщения уже мои самые любимые уведомления на экране.»',
+      '«Милана, учёные доказали: одно твоё голосовое или улыбка бодрят лучше любого утреннего кофе.»',
+      '«Если за первые 48 часов с тобой настолько круто, боюсь представить, какой кайф нас ждёт дальше.»',
+      '«Честно говоря, у тебя слишком красивое имя — его хочется произносить просто так без повода.»',
+      '«Официальный факт: ты умудрилась понравиться мне быстрее, чем открылся этот сайт на твоём айфоне.»',
+      '«С тобой даже обычная переписка ощущается как маленький праздник среди дня.»',
+      '«Милана — это когда красиво, легко, уютно и хочется улыбаться в экран телефона как дурачок.»',
+      '«План минимум на сегодня: увидеть твою улыбку. План максимум: быть её причиной.»',
+      '«Два дня — срок небольшой, но ты уже уверенно заняла VIP-место в моих мыслях.»'
+    ];
+    let compIdx = 0;
+    const compBox = document.getElementById('compliment-text');
+    document.getElementById('next-compliment-btn').addEventListener('click', () => {
+      compIdx = (compIdx + 1) % compliments.length;
+      compBox.style.opacity = '0';
+      compBox.style.transform = 'translateY(6px)';
+      playPop();
+      setTimeout(() => {
+        compBox.textContent = compliments[compIdx];
+        compBox.style.opacity = '1';
+        compBox.style.transform = 'translateY(0)';
+      }, 170);
+    });
+
+    // =========================================================================
+    // 8. MINI-GAME: CATCH THE HEARTS (iPhone Thumb Slider + Tap Ripples!)
+    // =========================================================================
+    const gameCanvas = document.getElementById('game-canvas');
+    const gCtx = gameCanvas.getContext('2d');
+    const gameStage = document.getElementById('game-stage');
+    const thumbTrack = document.getElementById('thumb-track');
+    const gameOverlay = document.getElementById('game-overlay');
+    const startGameBtn = document.getElementById('start-game-btn');
+    const scoreEl = document.getElementById('game-score');
+    const timeEl = document.getElementById('game-time');
+
+    let gWidth = 0;
+    let gHeight = 0;
+    let catcherX = 0;
+    let gameActive = false;
+    let score = 0;
+    let timeLeft = 18;
+    let items = [];
+    let popups = [];
+    let ripples = [];
+    let spawnClock = 0;
+    let gameTimerInterval = null;
+    let goldUnlocked = false;
+
+    function resizeGame() {
+      const rect = gameStage.getBoundingClientRect();
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      gWidth = rect.width;
+      gHeight = rect.height;
+      gameCanvas.width = gWidth * dpr;
+      gameCanvas.height = gHeight * dpr;
+      gCtx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      if (!catcherX || catcherX > gWidth) catcherX = gWidth / 2;
+    }
+    window.addEventListener('resize', resizeGame);
+    resizeGame();
+
+    function unlockGoldCoupon(celebrate = true) {
+      if (goldUnlocked) return;
+      goldUnlocked = true;
+      document.getElementById('gold-lock').classList.add('unlocked');
+      if (celebrate) {
+        spawnHeartsBurst(window.innerWidth / 2, window.innerHeight * 0.45, 34);
+        playWinChord();
+        showToast('👑 Золотой VIP-купон для Миланы разблокирован!');
+      }
+    }
+
+    function spawnGameItem() {
+      const roll = Math.random();
+      let type = { emoji: '💖', pts: 1, speed: 2.1 + Math.random() * 1.3, bad: false };
+      if (roll > 0.82) {
+        type = { emoji: '💝', pts: 3, speed: 2.7 + Math.random() * 1.2, bad: false };
+      } else if (roll > 0.65) {
+        type = { emoji: '☕', pts: 2, speed: 2.4 + Math.random() * 1.1, bad: false };
+      } else if (roll < 0.16) {
+        type = { emoji: '⏰', pts: -1, speed: 2.3 + Math.random() * 1.2, bad: true };
+      }
+      items.push({
+        x: 28 + Math.random() * Math.max(40, gWidth - 56),
+        y: -24,
+        ...type
+      });
+    }
+
+    function handleCatch(it) {
+      score = Math.max(0, score + it.pts);
+      scoreEl.textContent = score;
+      if (it.bad) {
+        playBad();
+        popups.push({ x: it.x, y: Math.max(28, it.y), text: 'Фу, будильник! −1', color: '#ef4444', alpha: 1 });
+      } else {
+        playPop();
+        const label = it.pts === 3 ? '+3 СУПЕР! 💝' : `+${it.pts} милота`;
+        popups.push({ x: it.x, y: Math.max(28, it.y), text: label, color: '#ff3b7f', alpha: 1 });
+      }
+      if (score >= 12 && !goldUnlocked) {
+        unlockGoldCoupon(true);
+      }
+    }
+
+    function updateStagePointer(clientX, clientY, checkTap = false) {
+      const rect = gameStage.getBoundingClientRect();
+      const x = clientX - rect.left;
+      const y = clientY - rect.top;
+      catcherX = Math.max(50, Math.min(gWidth - 50, x));
+
+      if (checkTap && gameActive) {
+        ripples.push({ x, y, r: 8, alpha: 0.7 });
+        // Generous 48px iPhone touch target radius
+        for (let i = items.length - 1; i >= 0; i--) {
+          const it = items[i];
+          if (Math.hypot(it.x - x, it.y - y) < 48) {
+            handleCatch(it);
+            items.splice(i, 1);
+            break;
+          }
+        }
+      }
+    }
+
+    gameStage.addEventListener('mousemove', (e) => updateStagePointer(e.clientX, e.clientY, false));
+    gameStage.addEventListener('mousedown', (e) => updateStagePointer(e.clientX, e.clientY, true));
+
+    gameStage.addEventListener('touchstart', (e) => {
+      if (!gameActive) return; // Allow smooth vertical page scroll when game is idle!
+      if (e.target.closest('button')) return;
+      e.preventDefault();
+      if (e.touches[0]) updateStagePointer(e.touches[0].clientX, e.touches[0].clientY, true);
+    }, { passive: false });
+
+    gameStage.addEventListener('touchmove', (e) => {
+      if (!gameActive) return;
+      e.preventDefault();
+      if (e.touches[0]) updateStagePointer(e.touches[0].clientX, e.touches[0].clientY, false);
+    }, { passive: false });
+
+    // Dedicated Thumb Track below canvas so thumb never blocks falling hearts on iPhone!
+    function updateFromThumbTrack(clientX) {
+      const rect = thumbTrack.getBoundingClientRect();
+      const ratio = Math.max(0, Math.min(1, (clientX - rect.left) / Math.max(1, rect.width)));
+      catcherX = 50 + ratio * Math.max(0, gWidth - 100);
+    }
+
+    thumbTrack.addEventListener('touchstart', (e) => {
+      if (e.touches[0]) updateFromThumbTrack(e.touches[0].clientX);
+    }, { passive: true });
+    thumbTrack.addEventListener('touchmove', (e) => {
+      if (e.cancelable) e.preventDefault();
+      if (e.touches[0]) updateFromThumbTrack(e.touches[0].clientX);
+    }, { passive: false });
+    thumbTrack.addEventListener('mousemove', (e) => {
+      if (e.buttons === 1 || gameActive) updateFromThumbTrack(e.clientX);
+    });
+
+    function endGame() {
+      gameActive = false;
+      gameStage.classList.remove('playing');
+      clearInterval(gameTimerInterval);
+      const won = score >= 12;
+      if (won) unlockGoldCoupon(true);
+
+      document.getElementById('overlay-icon').textContent = won ? '🏆💖' : '✨';
+      document.getElementById('overlay-title').textContent = won
+        ? `Вау, ${score} очков! Золотой купон открыт!`
+        : `Набрано ${score} из 12 очков!`;
+      document.getElementById('overlay-desc').textContent = won
+        ? 'Милана официально чемпион по ловле сердечек. Листай чуть ниже — секретный VIP-купон уже ждёт!'
+        : 'Почти получилось! Сыграем ещё разок за Золотой VIP-купон?';
+      startGameBtn.textContent = won ? 'Сыграть ещё на рекорд 🎮' : 'Попробовать ещё раз 🚀';
+      gameOverlay.classList.remove('hidden');
+    }
+
+    startGameBtn.addEventListener('click', () => {
+      unlockAudio();
+      resizeGame();
+      score = 0;
+      timeLeft = 18;
+      items = [];
+      popups = [];
+      ripples = [];
+      scoreEl.textContent = '0';
+      timeEl.textContent = '18';
+      gameOverlay.classList.add('hidden');
+      gameStage.classList.add('playing');
+      gameActive = true;
+      playPop();
+
+      clearInterval(gameTimerInterval);
+      gameTimerInterval = setInterval(() => {
+        timeLeft--;
+        timeEl.textContent = String(Math.max(0, timeLeft));
+        if (timeLeft <= 0) endGame();
+      }, 1000);
+    });
+
+    function gameLoop() {
+      gCtx.clearRect(0, 0, gWidth, gHeight);
+
+      if (gameActive) {
+        spawnClock++;
+        if (spawnClock % 23 === 0) spawnGameItem();
+      }
+
+      // Tap ripples
+      for (let i = ripples.length - 1; i >= 0; i--) {
+        const rp = ripples[i];
+        rp.r += 2.2;
+        rp.alpha -= 0.045;
+        if (rp.alpha <= 0) {
+          ripples.splice(i, 1);
+          continue;
+        }
+        gCtx.save();
+        gCtx.strokeStyle = `rgba(255, 59, 127, ${rp.alpha})`;
+        gCtx.lineWidth = 2;
+        gCtx.beginPath();
+        gCtx.arc(rp.x, rp.y, rp.r, 0, Math.PI * 2);
+        gCtx.stroke();
+        gCtx.restore();
+      }
+
+      // Draw catcher pill (compatible with all iOS versions)
+      const catcherY = gHeight - 32;
+      const catcherW = 102;
+      const catcherH = 28;
+      gCtx.save();
+      const grad = gCtx.createLinearGradient(catcherX - catcherW / 2, catcherY, catcherX + catcherW / 2, catcherY);
+      grad.addColorStop(0, '#ff3b7f');
+      grad.addColorStop(1, '#ff7a59');
+      gCtx.fillStyle = grad;
+      drawPill(gCtx, catcherX - catcherW / 2, catcherY - catcherH / 2, catcherW, catcherH, 14);
+      gCtx.fill();
+      gCtx.fillStyle = '#ffffff';
+      gCtx.font = '700 12.5px -apple-system, BlinkMacSystemFont, sans-serif';
+      gCtx.textAlign = 'center';
+      gCtx.textBaseline = 'middle';
+      gCtx.fillText('🤍 Милана', catcherX, catcherY + 0.5);
+      gCtx.restore();
+
+      // Update & draw falling items
+      for (let i = items.length - 1; i >= 0; i--) {
+        const it = items[i];
+        if (gameActive) it.y += it.speed;
+
+        gCtx.font = '27px "Apple Color Emoji", "Segoe UI Emoji", serif';
+        gCtx.textAlign = 'center';
+        gCtx.textBaseline = 'middle';
+        gCtx.fillText(it.emoji, it.x, it.y);
+
+        if (
+          gameActive &&
+          it.y + 15 >= catcherY - catcherH / 2 &&
+          it.y - 15 <= catcherY + catcherH / 2 &&
+          Math.abs(it.x - catcherX) <= catcherW / 2 + 15
+        ) {
+          handleCatch(it);
+          items.splice(i, 1);
+          continue;
+        }
+
+        if (it.y > gHeight + 32) {
+          items.splice(i, 1);
+        }
+      }
+
+      // Floating score popups
+      for (let i = popups.length - 1; i >= 0; i--) {
+        const p = popups[i];
+        p.y -= 1.05;
+        p.alpha -= 0.024;
+        if (p.alpha <= 0) {
+          popups.splice(i, 1);
+          continue;
+        }
+        gCtx.save();
+        gCtx.globalAlpha = p.alpha;
+        gCtx.fillStyle = p.color;
+        gCtx.font = '800 13px -apple-system, BlinkMacSystemFont, sans-serif';
+        gCtx.textAlign = 'center';
+        gCtx.fillText(p.text, p.x, p.y);
+        gCtx.restore();
+      }
+
+      requestAnimationFrame(gameLoop);
+    }
+    gameLoop();
+
+    // Secret 5-tap unlock on Gold Coupon Lock
+    let secretTaps = 0;
+    document.getElementById('gold-lock').addEventListener('click', () => {
+      secretTaps++;
+      playPop();
+      const left = 5 - secretTaps;
+      if (left > 0) {
+        document.getElementById('lock-subtext').textContent = `По блату осталось тапнуть ещё ${left} раз(а) 😉`;
+      } else {
+        unlockGoldCoupon(true);
+      }
+    });
+
+    // =========================================================================
+    // 9. COUPONS REDEMPTION (Native iOS Share Sheet + Clipboard!)
+    // =========================================================================
+    document.querySelectorAll('.redeem-btn').forEach((btn) => {
+      btn.addEventListener('click', (e) => {
+        const card = e.currentTarget.closest('.coupon');
+        const code = card.dataset.code;
+        const title = card.dataset.title;
+        const alreadyRedeemed = card.classList.contains('redeemed');
+
+        card.classList.add('redeemed');
+        const rect = e.currentTarget.getBoundingClientRect();
+        spawnHeartsBurst(rect.left + rect.width / 2, rect.top, 22);
+        playWinChord();
+
+        const msg = `Привет! Я официально активирую купон ${code}: «${title}» 🎟️💖 Когда исполняем?`;
+        e.currentTarget.textContent = 'Отправить купон в чат 💌';
+
+        if (alreadyRedeemed) {
+          shareOrCopy(msg, 'Текст купона скопирован для чата! 💌');
+        } else {
+          copyText(msg, 'Купон активирован и скопирован! Нажми ещё раз, чтобы сразу переслать 💌');
+        }
+      });
+    });
+
+    // =========================================================================
+    // 10. COLLISION-FREE IPHONE RUNAWAY "NO" BUTTON & GRAND FINALE
+    // =========================================================================
+    const arena = document.getElementById('runaway-arena');
+    const yesAnchor = document.getElementById('yes-anchor');
+    const btnYes = document.getElementById('btn-yes');
+    const btnNo = document.getElementById('btn-no');
+    const dodgeStatus = document.getElementById('dodge-status');
+    const certificate = document.getElementById('certificate');
+
+    const dodgeLines = [
+      { btn: 'Ой, мимо! 🙈', note: 'Кажется, кнопка «Нет» немного стесняется твоего пальца...' },
+      { btn: 'Не поймаешь 😜', note: 'Независимая комиссия рекомендует красивую розовую кнопку сверху!' },
+      { btn: 'Ошибка 404 🚀', note: 'Отказ не поддерживается вашей версией iOS 😄' },
+      { btn: 'Я в отпуске 🏖️', note: 'Заметила, как кнопка «Да» стала чуточку притягательнее? 👀' },
+      { btn: 'Ну Милааан 😄', note: 'Упорство 10 из 10, но от судьбы не убежишь!' },
+      { btn: 'Побереги пальчик ✨', note: 'Ещё одна попытка — и эта кнопка тоже перейдёт на мою сторону!' },
+      { btn: 'Ладно, тоже ДА! 💘', note: 'Всё, обе кнопки официально голосуют за нас двоих!' }
+    ];
+
+    const puffEmojis = ['💨', '🙈', '😜', '✨', '💘'];
+    let dodges = 0;
+    let surrendered = false;
+    let lastDodgeTime = 0;
+
+    function spawnEscapePuff(x, y) {
+      const puff = document.createElement('span');
+      puff.className = 'escape-puff';
+      puff.textContent = puffEmojis[dodges % puffEmojis.length];
+      puff.style.left = `${x}px`;
+      puff.style.top = `${y}px`;
+      arena.appendChild(puff);
+      setTimeout(() => puff.remove(), 580);
+    }
+
+    function boxesOverlap(a, b, margin = 12) {
+      return !(
+        a.right + margin < b.left ||
+        a.left - margin > b.right ||
+        a.bottom + margin < b.top ||
+        a.top - margin > b.bottom
+      );
+    }
+
+    function moveNoButton(e) {
+      if (surrendered) return;
+      const now = Date.now();
+      if (now - lastDodgeTime < 110) return; // Debounce dual touch+mouse events
+      lastDodgeTime = now;
+
+      if (e && e.cancelable) e.preventDefault();
+
+      const arenaRect = arena.getBoundingClientRect();
+      const yesRectRel = {
+        left: yesAnchor.offsetLeft - yesAnchor.offsetWidth / 2,
+        top: yesAnchor.offsetTop,
+        right: yesAnchor.offsetLeft + yesAnchor.offsetWidth / 2,
+        bottom: yesAnchor.offsetTop + yesAnchor.offsetHeight
+      };
+
+      // Spawn puff at old button center
+      const oldRect = btnNo.getBoundingClientRect();
+      spawnEscapePuff(
+        oldRect.left - arenaRect.left + oldRect.width / 2,
+        oldRect.top - arenaRect.top + oldRect.height / 2
+      );
+
+      // Update label BEFORE measuring width so new width never clips off iPhone screen!
+      const step = dodgeLines[Math.min(dodges, dodgeLines.length - 1)];
+      btnNo.textContent = step.btn;
+      dodgeStatus.textContent = step.note;
+
+      btnNo.style.transform = 'none';
+      const btnW = btnNo.offsetWidth;
+      const btnH = btnNo.offsetHeight;
+      const pad = 10;
+
+      const maxX = Math.max(pad, arenaRect.width - btnW - pad);
+      const maxY = Math.max(pad, arenaRect.height - btnH - pad);
+
+      // Pointer coordinates inside arena (if available)
+      let ptrX = oldRect.left - arenaRect.left + btnW / 2;
+      let ptrY = oldRect.top - arenaRect.top + btnH / 2;
+      if (e) {
+        const touch = e.touches && e.touches[0];
+        const cx = touch ? touch.clientX : e.clientX;
+        const cy = touch ? touch.clientY : e.clientY;
+        if (typeof cx === 'number' && typeof cy === 'number') {
+          ptrX = cx - arenaRect.left;
+          ptrY = cy - arenaRect.top;
+        }
+      }
+
+      // Pick best collision-free candidate far from finger & never overlapping YES!
+      let bestX = pad;
+      let bestY = maxY;
+      let bestScore = -1;
+
+      for (let attempt = 0; attempt < 28; attempt++) {
+        const cx = pad + Math.random() * Math.max(1, maxX - pad);
+        const cy = pad + Math.random() * Math.max(1, maxY - pad);
+        const candidateBox = { left: cx, top: cy, right: cx + btnW, bottom: cy + btnH };
+
+        const overlapsYes = boxesOverlap(candidateBox, yesRectRel, 14);
+        const distFromFinger = Math.hypot(cx + btnW / 2 - ptrX, cy + btnH / 2 - ptrY);
+        const scoreVal = (overlapsYes ? -1000 : 0) + distFromFinger;
+
+        if (scoreVal > bestScore) {
+          bestScore = scoreVal;
+          bestX = cx;
+          bestY = cy;
+        }
+      }
+
+      btnNo.style.left = `${Math.round(bestX)}px`;
+      btnNo.style.top = `${Math.round(bestY)}px`;
+
+      const scale = Math.min(1.22, 1 + (dodges + 1) * 0.035);
+      btnYes.style.transform = `scale(${scale})`;
+
+      playDodge();
+      dodges++;
+
+      if (dodges >= dodgeLines.length) {
+        surrendered = true;
+        btnNo.classList.remove('btn-ghost');
+        btnNo.classList.add('btn-primary');
+      }
+    }
+
+    btnNo.addEventListener('mouseenter', moveNoButton);
+    btnNo.addEventListener('touchstart', moveNoButton, { passive: false });
+    btnNo.addEventListener('click', (e) => {
+      if (!surrendered) {
+        moveNoButton(e);
+      } else {
+        celebrateYes();
+      }
+    });
+
+    function celebrateYes() {
+      playWinChord();
+      spawnHeartsBurst(window.innerWidth * 0.5, window.innerHeight * 0.42, 55);
+      setTimeout(() => spawnHeartsBurst(window.innerWidth * 0.22, window.innerHeight * 0.48, 34), 220);
+      setTimeout(() => spawnHeartsBurst(window.innerWidth * 0.78, window.innerHeight * 0.48, 34), 420);
+
+      arena.style.display = 'none';
+      dodgeStatus.style.display = 'none';
+      document.getElementById('finale-sub').textContent = 'Голосование завершено единогласно и без малейших сомнений!';
+      certificate.classList.add('visible');
+    }
+
+    btnYes.addEventListener('click', celebrateYes);
+
+    document.getElementById('send-yes-btn').addEventListener('click', () => {
+      const reply = 'Я открыла твой сайт и официально нажала «ДА» на наш 3-й день (и дальше)! 💖✨ Готовься исполнять купоны!';
+      playPop();
+      shareOrCopy(reply, 'Ответ скопирован! Отправь его мне в чат 💬💖');
+    });
+
+    document.getElementById('more-confetti-btn').addEventListener('click', () => {
+      playWinChord();
+      spawnHeartsBurst(window.innerWidth * 0.5, window.innerHeight * 0.45, 50);
+    });
+  </script>
+</body>
+</html>
