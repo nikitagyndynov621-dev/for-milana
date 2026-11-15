@@ -1166,6 +1166,241 @@
       border-color: var(--accent);
     }
 
+    /* ============================================================
+       SHARED PLAN (общий план моментов, синхронизация двух устройств)
+       ============================================================ */
+    .plan-sync {
+      display: inline-flex;
+      align-items: center;
+      gap: 7px;
+      font-size: 0.68rem;
+      font-weight: 750;
+      letter-spacing: 0.04em;
+      color: var(--text-muted);
+      text-transform: uppercase;
+    }
+
+    .plan-sync .dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--mint);
+      box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.16);
+      transition: background 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .plan-sync.syncing .dot {
+      background: var(--gold);
+      box-shadow: 0 0 0 3px rgba(176, 129, 47, 0.18);
+      animation: pulseDot 1.4s infinite;
+    }
+
+    .plan-sync.offline .dot {
+      background: var(--text-muted);
+      box-shadow: 0 0 0 3px rgba(156, 139, 163, 0.18);
+    }
+
+    .plan-who {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-bottom: 12px;
+    }
+
+    .plan-who-lbl {
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-right: 2px;
+    }
+
+    .who-chip {
+      padding: 5px 11px;
+      border-radius: var(--radius-pill);
+      border: 1px dashed var(--border-strong);
+      background: transparent;
+      color: var(--text-soft);
+      font-family: inherit;
+      font-size: 0.76rem;
+      font-weight: 750;
+      cursor: pointer;
+      transition: all 0.18s ease;
+    }
+
+    .who-chip.is-on {
+      border-style: solid;
+      border-color: var(--border-strong);
+      background: linear-gradient(160deg, rgba(255, 255, 255, 0.94), var(--accent-soft));
+      color: var(--accent);
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 6px 14px -12px rgba(198, 20, 90, 0.6);
+    }
+
+    [data-theme="dark"] .who-chip.is-on {
+      background: linear-gradient(160deg, rgba(255, 77, 141, 0.2), rgba(255, 77, 141, 0.06));
+    }
+
+    .plan-tip {
+      margin-top: 9px;
+      font-size: 0.72rem;
+      color: var(--text-muted);
+      letter-spacing: 0.01em;
+      line-height: 1.45;
+    }
+
+    .plan-list {
+      display: flex;
+      flex-direction: column;
+      gap: 9px;
+      margin-top: 14px;
+    }
+
+    .plan-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      padding: 11px 13px;
+      border-radius: 15px;
+      border: 1px solid var(--border);
+      background: linear-gradient(170deg, rgba(255, 255, 255, 0.94), rgba(255, 249, 250, 0.72));
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.9) inset, 0 8px 20px -18px rgba(110, 28, 66, 0.5);
+      animation: planPop 0.32s cubic-bezier(0.34, 1.56, 0.64, 1);
+    }
+
+    [data-theme="dark"] .plan-item {
+      background: linear-gradient(170deg, rgba(48, 34, 66, 0.8), rgba(30, 21, 44, 0.7));
+      box-shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset;
+    }
+
+    @keyframes planPop {
+      from { opacity: 0; transform: translateY(-6px) scale(0.985); }
+      to { opacity: 1; transform: none; }
+    }
+
+    .plan-item.done {
+      opacity: 0.66;
+      border-style: dashed;
+    }
+
+    .plan-item.done .plan-item-txt {
+      text-decoration: line-through;
+      text-decoration-thickness: 1.5px;
+    }
+
+    .plan-item-main {
+      flex: 1;
+      min-width: 0;
+      cursor: pointer;
+    }
+
+    .plan-item-txt {
+      font-size: 0.92rem;
+      font-weight: 650;
+      line-height: 1.42;
+      color: var(--text);
+      word-break: break-word;
+    }
+
+    .plan-item-meta {
+      display: flex;
+      align-items: center;
+      gap: 7px;
+      margin-top: 5px;
+      flex-wrap: wrap;
+    }
+
+    .plan-badge {
+      font-size: 0.6rem;
+      font-weight: 850;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: var(--radius-pill);
+      border: 1px solid;
+    }
+
+    .plan-badge.he {
+      color: #2563eb;
+      border-color: rgba(37, 99, 235, 0.34);
+      background: rgba(37, 99, 235, 0.09);
+    }
+
+    .plan-badge.she {
+      color: var(--accent);
+      border-color: var(--border-strong);
+      background: var(--accent-soft);
+    }
+
+    [data-theme="dark"] .plan-badge.he {
+      color: #8ab4ff;
+      border-color: rgba(138, 180, 255, 0.32);
+      background: rgba(59, 130, 246, 0.16);
+    }
+
+    .plan-time {
+      font-size: 0.68rem;
+      color: var(--text-muted);
+      font-weight: 650;
+      letter-spacing: 0.02em;
+    }
+
+    .plan-done-btn {
+      flex-shrink: 0;
+      width: 30px;
+      height: 30px;
+      border-radius: 50%;
+      border: 1px solid var(--border-strong);
+      background: rgba(255, 255, 255, 0.7);
+      color: var(--text-muted);
+      font-size: 0.82rem;
+      font-weight: 800;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: transform 0.18s cubic-bezier(0.34, 1.56, 0.64, 1), background 0.18s ease, color 0.18s ease;
+    }
+
+    .plan-done-btn { color: rgba(156, 139, 163, 0.75); }
+
+    .plan-done-btn:active { transform: scale(0.88); }
+
+    .plan-item.done .plan-done-btn {
+      background: var(--mint);
+      border-color: var(--mint);
+      color: #ffffff;
+    }
+
+    [data-theme="dark"] .plan-done-btn { background: rgba(255, 255, 255, 0.06); }
+
+    .plan-empty {
+      padding: 16px;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--text-muted);
+      border: 1px dashed var(--border-strong);
+      border-radius: 15px;
+      line-height: 1.5;
+    }
+
+    .plan-foot {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: 12px;
+    }
+
+    .plan-hint {
+      font-size: 0.7rem;
+      color: var(--text-muted);
+      letter-spacing: 0.02em;
+      text-align: right;
+    }
+
     /* Gentle Scroll Reveal */
     .reveal-on-scroll {
       opacity: 0;
@@ -3440,28 +3675,46 @@
         </div>
       </div>
 
-      <!-- Interactive Wish Capsule: Milana can add the next moment! -->
-      <div class="wish-capsule">
+      <!-- SHARED PLAN CAPSULE: синхронизируется между устройствами обоих -->
+      <div class="wish-capsule" id="plan-capsule">
         <div class="wish-head">
-          <h4>🌠 Загадай наш следующий момент, Милана</h4>
-          <span style="font-size: 0.78rem; color: var(--text-muted); font-weight: 650;">Появится прямо в альбоме выше!</span>
+          <h4>🌠 Наш общий план моментов</h4>
+          <span class="plan-sync" id="plan-sync"><span class="dot"></span><span id="plan-sync-text">подключаюсь…</span></span>
         </div>
+
+        <div class="plan-who">
+          <span class="plan-who-lbl">Пишу как:</span>
+          <button type="button" class="who-chip" data-who="he">💙 Он</button>
+          <button type="button" class="who-chip" data-who="she">💗 Милана</button>
+        </div>
+
         <div class="wish-chips">
           <button type="button" class="wish-chip" data-wish="Гулять вдвоём под ночную музыку 🌙">🌙 Ночная прогулка</button>
           <button type="button" class="wish-chip" data-wish="Смотреть фильм в обнимку с вкусняшками 🎬">🎬 Кино в обнимку</button>
           <button type="button" class="wish-chip" data-wish="Встретить красивый закат с кофе ☕✨">☕ Закат с кофе</button>
           <button type="button" class="wish-chip" data-wish="Устроить спонтанную поездку вдвоём 🚗">🚗 Поездка вдвоём</button>
         </div>
+
         <form class="wish-form" id="wish-form">
           <input
             type="text"
             class="wish-input"
             id="wish-input"
-            maxlength="90"
-            placeholder="Или напиши свою идею момента..."
+            maxlength="140"
+            placeholder="Напиши идею момента…"
+            autocomplete="off"
           />
           <button type="submit" class="btn btn-primary">Добавить в наш план 💌</button>
         </form>
+
+        <div class="plan-tip">Можно и командой: «добавить в наш план: …» — я пойму и добавлю сама ✨</div>
+
+        <div class="plan-list" id="plan-list" aria-live="polite"></div>
+
+        <div class="plan-foot">
+          <button type="button" class="tiny-link-btn" id="plan-refresh">⟳ обновить</button>
+          <span class="plan-hint" id="plan-count">общий список — видно на обоих телефонах</span>
+        </div>
       </div>
     </section>
 
@@ -4658,10 +4911,345 @@
       });
     });
 
-    // Interactive Wish Capsule (Milana adds next moment!)
+    // =========================================================================
+    // 11b. SHARED PLAN — общий план моментов, синхронизируется на двух телефонах
+    // =========================================================================
+    const PLAN_BIN = 'https://extendsclass.com/api/json-storage/bin/fceeaee';
+    const PLAN_KEY = 'milana_plan_v2';
+    const PLAN_WHO_KEY = 'milana_plan_who';
+
     const wishInput = document.getElementById('wish-input');
     const wishForm = document.getElementById('wish-form');
     const futureGrid = document.getElementById('future-moments-grid');
+    const planListEl = document.getElementById('plan-list');
+    const planSyncEl = document.getElementById('plan-sync');
+    const planSyncText = document.getElementById('plan-sync-text');
+    const planCountEl = document.getElementById('plan-count');
+
+    let planState = { v: 1, updated: 0, items: [] };
+    let planDirty = false;
+    let planBusy = false;
+
+    const newId = () => 'm-' + Math.random().toString(36).slice(2, 10);
+    const cleanText = (t) => String(t || '').replace(/\s+/g, ' ').trim().slice(0, 140);
+
+    function normalizePlan(raw) {
+      const out = { v: 1, updated: Number(raw && raw.updated) || 0, items: [] };
+      const list = raw && Array.isArray(raw.items) ? raw.items : [];
+      list.forEach((it) => {
+        if (!it || typeof it.text !== 'string' || !it.text.trim()) return;
+        out.items.push({
+          id: String(it.id || newId()),
+          text: cleanText(it.text),
+          who: it.who === 'he' ? 'he' : 'she',
+          ts: Number(it.ts) || Date.now(),
+          done: !!it.done,
+          upd: Number(it.upd) || Number(it.ts) || Date.now()
+        });
+      });
+      return out;
+    }
+
+    // Объединяем локальную и облачную версию без потери чужих правок
+    function mergePlans(a, b) {
+      const map = new Map();
+      [a, b].forEach((state) => {
+        (state.items || []).forEach((it) => {
+          const prev = map.get(it.id);
+          if (!prev || (it.upd || 0) >= (prev.upd || 0)) map.set(it.id, it);
+        });
+      });
+      return {
+        v: 1,
+        updated: Math.max(a.updated || 0, b.updated || 0),
+        items: [...map.values()].sort((x, y) => x.ts - y.ts)
+      };
+    }
+
+    function savePlanLocal() {
+      safeStorage.set(PLAN_KEY, JSON.stringify(planState));
+    }
+
+    function loadPlanLocal() {
+      try {
+        const raw = safeStorage.get(PLAN_KEY);
+        if (raw) planState = mergePlans(planState, normalizePlan(JSON.parse(raw)));
+      } catch (_) {}
+    }
+
+    function setSyncState(kind, text) {
+      if (!planSyncEl) return;
+      planSyncEl.classList.remove('syncing', 'offline');
+      if (kind === 'syncing') planSyncEl.classList.add('syncing');
+      if (kind === 'offline') planSyncEl.classList.add('offline');
+      planSyncText.textContent = text;
+    }
+
+    function getWho() {
+      return safeStorage.get(PLAN_WHO_KEY) === 'he' ? 'he' : 'she';
+    }
+
+    function renderWho() {
+      const who = getWho();
+      document.querySelectorAll('.who-chip').forEach((b) => {
+        b.classList.toggle('is-on', b.dataset.who === who);
+      });
+    }
+
+    function timeAgo(ts) {
+      const diff = Date.now() - ts;
+      const m = Math.floor(diff / 60000);
+      if (m < 1) return 'только что';
+      if (m < 60) return `${m} мин назад`;
+      const h = Math.floor(m / 60);
+      if (h < 24) return `${h} ч назад`;
+      const d = Math.floor(h / 24);
+      if (d === 1) return 'вчера';
+      if (d < 7) return `${d} дн назад`;
+      const dt = new Date(ts);
+      return `${String(dt.getDate()).padStart(2, '0')}.${String(dt.getMonth() + 1).padStart(2, '0')}`;
+    }
+
+    function renderPlan(animateNew) {
+      if (!planListEl) return;
+      const items = planState.items.slice().sort((a, b) => {
+        if (a.done !== b.done) return a.done ? 1 : -1;
+        return b.ts - a.ts;
+      });
+
+      planListEl.innerHTML = '';
+
+      if (!items.length) {
+        const empty = document.createElement('div');
+        empty.className = 'plan-empty';
+        empty.textContent = 'Пока пусто — напиши идею выше, и она сразу появится у нас обоих ✨';
+        planListEl.appendChild(empty);
+      }
+
+      items.forEach((it) => {
+        const row = document.createElement('div');
+        row.className = 'plan-item' + (it.done ? ' done' : '');
+
+        const main = document.createElement('div');
+        main.className = 'plan-item-main';
+
+        const txt = document.createElement('div');
+        txt.className = 'plan-item-txt';
+        txt.textContent = it.text;
+
+        const meta = document.createElement('div');
+        meta.className = 'plan-item-meta';
+
+        const badge = document.createElement('span');
+        badge.className = 'plan-badge ' + it.who;
+        badge.textContent = it.who === 'he' ? '💙 Он' : '💗 Милана';
+
+        const time = document.createElement('span');
+        time.className = 'plan-time';
+        time.textContent = timeAgo(it.ts) + (it.done ? ' · исполнено' : '');
+
+        meta.appendChild(badge);
+        meta.appendChild(time);
+        main.appendChild(txt);
+        main.appendChild(meta);
+
+        main.onclick = () => {
+          playPop();
+          const phrasing = it.who === 'he'
+            ? `Смотри, что я добавил в наш план: «${it.text}» 🌠`
+            : `Я добавила в наш план: «${it.text}» 🌠💖`;
+          shareOrCopy(phrasing, 'Идея скопирована для нашего чата! 💌');
+        };
+
+        const doneBtn = document.createElement('button');
+        doneBtn.type = 'button';
+        doneBtn.className = 'plan-done-btn';
+        doneBtn.setAttribute('aria-label', it.done ? 'Вернуть в план' : 'Отметить исполненным');
+        doneBtn.textContent = '✓';
+        doneBtn.onclick = (e) => {
+          e.stopPropagation();
+          togglePlanItem(it.id);
+        };
+
+        row.appendChild(main);
+        row.appendChild(doneBtn);
+        planListEl.appendChild(row);
+
+        if (animateNew && it.ts > Date.now() - 4000) {
+          const rect = row.getBoundingClientRect();
+          spawnHeartsBurst(rect.left + 40, Math.max(90, rect.top + 20), 16);
+        }
+      });
+
+      if (planCountEl) {
+        const open = items.filter((i) => !i.done).length;
+        planCountEl.textContent = items.length
+          ? `${open} в плане · ${items.length - open} исполнено`
+          : 'общий список — видно на обоих телефонах';
+      }
+
+      renderAlbumSlot();
+    }
+
+    // Последняя идея дублируется карточкой в альбоме моментов
+    function renderAlbumSlot() {
+      if (!futureGrid) return;
+      const newest = planState.items.slice().sort((a, b) => b.ts - a.ts)[0];
+      let slot = document.getElementById('milana-custom-wish-slot');
+      if (!newest) {
+        if (slot) slot.remove();
+        return;
+      }
+      if (!slot) {
+        slot = document.createElement('div');
+        slot.id = 'milana-custom-wish-slot';
+        slot.className = 'future-slot custom-unlocked';
+        futureGrid.prepend(slot);
+      }
+      slot.innerHTML = '';
+      const preview = document.createElement('div');
+      preview.className = 'future-preview';
+      const icon = document.createElement('span');
+      icon.className = 'slot-lock-icon';
+      icon.textContent = '🌠';
+      const label = document.createElement('span');
+      label.className = 'slot-num';
+      label.style.color = 'var(--accent)';
+      label.textContent = newest.who === 'he' ? 'ДОБАВИЛ ОН' : 'ЗАГАДАЛА МИЛАНА';
+      preview.appendChild(icon);
+      preview.appendChild(label);
+
+      const body = document.createElement('div');
+      const h4 = document.createElement('h4');
+      h4.textContent = newest.text;
+      const p = document.createElement('p');
+      p.textContent = 'Из нашего общего плана. Тапни, чтобы отправить в чат 💌';
+      body.appendChild(h4);
+      body.appendChild(p);
+
+      slot.appendChild(preview);
+      slot.appendChild(body);
+      slot.onclick = () => {
+        playPop();
+        shareOrCopy(`Наш следующий момент: «${newest.text}» 🌠`, 'Идея скопирована для чата! 💌');
+      };
+    }
+
+    async function pushPlan() {
+      if (planBusy) { planDirty = true; return; }
+      planBusy = true;
+      setSyncState('syncing', 'сохраняю…');
+      try {
+        planState.updated = Date.now();
+        const res = await fetch(PLAN_BIN, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(planState)
+        });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        planDirty = false;
+        savePlanLocal();
+        setSyncState('ok', 'синхронизировано');
+      } catch (err) {
+        planDirty = true;
+        savePlanLocal();
+        setSyncState('offline', 'сохранено на телефоне');
+      } finally {
+        planBusy = false;
+      }
+    }
+
+    async function pullPlan(silent) {
+      if (!navigator.onLine) {
+        setSyncState('offline', 'нет сети — пока локально');
+        return;
+      }
+      try {
+        setSyncState('syncing', 'обновляю…');
+        const res = await fetch(PLAN_BIN + '?t=' + Date.now(), { cache: 'no-store' });
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        let raw = await res.text();
+        const cut = raw.toLowerCase().indexOf('<!doctype');
+        if (cut > 0) raw = raw.slice(0, cut);
+        const cloud = normalizePlan(JSON.parse(raw.trim()));
+        const merged = mergePlans(planState, cloud);
+        const locallyNewer = merged.items.length !== cloud.items.length;
+        planState = merged;
+        savePlanLocal();
+        renderPlan(!silent);
+        if (locallyNewer || planDirty) {
+          await pushPlan();
+        } else {
+          setSyncState('ok', 'синхронизировано');
+        }
+      } catch (err) {
+        setSyncState('offline', 'пока без сети');
+        renderPlan(false);
+      }
+    }
+
+    // Команды в свободной форме: «добавить в наш план: ...», «добавь в план ...», «+ ...»
+    function parsePlanCommand(raw) {
+      let t = cleanText(raw);
+      if (!t) return '';
+      const prefixes = [
+        /^добав(ь|ить|ьте|ляй|ляйте)\s+(это\s+)?в\s+наш\s+план[\s:,.\-–—]+/i,
+        /^добав(ь|ить|ьте|ляй|ляйте)\s+(это\s+)?(в\s+)?план[\s:,.\-–—]+/i,
+        /^добав(ь|ить|ьте)\s+момент[\s:,.\-–—]+/i,
+        /^хочу\s+в\s+наш\s+план[\s:,.\-–—]+/i,
+        /^план[\s:,.\-–—]+/i,
+        /^[+•\-–—]\s*/
+      ];
+      for (const re of prefixes) t = t.replace(re, '').trim();
+      return cleanText(t);
+    }
+
+    function addPlanItem(text, options = {}) {
+      const value = parsePlanCommand(text);
+      if (!value) {
+        showToast('Напиши идею момента — можно так: «добавить в наш план: гулять 🌙»');
+        return false;
+      }
+      const now = Date.now();
+      planState.items.push({
+        id: newId(),
+        text: value,
+        who: options.who || getWho(),
+        ts: now,
+        done: false,
+        upd: now
+      });
+      savePlanLocal();
+      renderPlan(true);
+      pushPlan();
+      return true;
+    }
+
+    function togglePlanItem(id) {
+      const item = planState.items.find((i) => i.id === id);
+      if (!item) return;
+      item.done = !item.done;
+      item.upd = Date.now();
+      savePlanLocal();
+      renderPlan(false);
+      pushPlan();
+      if (item.done) {
+        playWinChord();
+        showToast('Момент исполнен! Закрашиваем в альбоме ✓💖');
+      } else {
+        playPop();
+      }
+    }
+
+    // Обработчики
+    document.querySelectorAll('.who-chip').forEach((btn) => {
+      btn.addEventListener('click', () => {
+        safeStorage.set(PLAN_WHO_KEY, btn.dataset.who);
+        renderWho();
+        playPop();
+        showToast(btn.dataset.who === 'he' ? 'Теперь идеи подписываются «Он» 💙' : 'Теперь идеи подписываются «Милана» 💗');
+      });
+    });
 
     document.querySelectorAll('.wish-chip').forEach((chip) => {
       chip.addEventListener('click', () => {
@@ -4671,62 +5259,49 @@
       });
     });
 
-    function renderSavedWish(wishText, animate = false) {
-      if (!wishText) return;
-      let existing = document.getElementById('milana-custom-wish-slot');
-      if (!existing) {
-        existing = document.createElement('div');
-        existing.id = 'milana-custom-wish-slot';
-        existing.className = 'future-slot custom-unlocked';
-        futureGrid.prepend(existing);
-      }
-      existing.innerHTML = '';
-      const preview = document.createElement('div');
-      preview.className = 'future-preview';
-      preview.innerHTML = '<span class="slot-lock-icon">🌠</span><span class="slot-num" style="color:var(--accent);">Загадано Миланой</span>';
-
-      const body = document.createElement('div');
-      const h4 = document.createElement('h4');
-      h4.textContent = wishText;
-      const p = document.createElement('p');
-      p.textContent = 'Забронировано в наш ближайший план! Нажми, чтобы переслать мне в чат 💌';
-      body.appendChild(h4);
-      body.appendChild(p);
-
-      existing.appendChild(preview);
-      existing.appendChild(body);
-
-      existing.onclick = () => {
-        playPop();
-        shareOrCopy(`Я добавила в наш альбом следующий момент: «${wishText}» 🌠💖 Когда устроим?`, 'Идея скопирована для чата! 💌');
-      };
-
-      if (animate) {
-        const rect = existing.getBoundingClientRect();
-        spawnHeartsBurst(rect.left + rect.width / 2, Math.max(80, rect.top + 40), 28);
-      }
-    }
-
-    const savedWish = safeStorage.get('milana_next_wish');
-    if (savedWish) renderSavedWish(savedWish, false);
-
     wishForm.addEventListener('submit', (e) => {
       e.preventDefault();
-      const val = wishInput.value.trim();
-      if (!val) {
-        showToast('Выбери кнопку с идеей выше или напиши свою ✨');
-        return;
-      }
-      safeStorage.set('milana_next_wish', val);
-      renderSavedWish(val, true);
+      const added = addPlanItem(wishInput.value);
+      if (!added) return;
       playWinChord();
       wishInput.value = '';
       wishInput.blur();
-      shareOrCopy(
-        `Я загадала на твоём сайте наш следующий момент: «${val}» 🌠💖 Жду исполнения!`,
-        'Момент добавлен в альбом и скопирован для нашего чата! 🌠💌'
-      );
+      showToast('Добавлено в наш общий план — у Миланы появится при обновлении 💞');
     });
+
+    const refreshBtn = document.getElementById('plan-refresh');
+    if (refreshBtn) {
+      refreshBtn.addEventListener('click', () => {
+        playPop();
+        pullPlan(false).then(() => showToast('План обновлён ✨'));
+      });
+    }
+
+    // Первичная загрузка + периодическая синхронизация
+    (function initPlan() {
+      loadPlanLocal();
+
+      // Переносим старую локальную «загадку» в общий план
+      const legacy = safeStorage.get('milana_next_wish');
+      if (legacy && !planState.items.some((i) => i.text === cleanText(legacy))) {
+        planState.items.push({ id: newId(), text: cleanText(legacy), who: 'she', ts: Date.now(), done: false, upd: Date.now() });
+        planDirty = true;
+      }
+
+      renderWho();
+      renderPlan(false);
+      pullPlan(true);
+
+      setInterval(() => {
+        if (!document.hidden) pullPlan(true);
+      }, 15000);
+
+      document.addEventListener('visibilitychange', () => {
+        if (!document.hidden) pullPlan(true);
+      });
+      window.addEventListener('online', () => pullPlan(true));
+      window.addEventListener('offline', () => setSyncState('offline', 'нет сети — пока локально'));
+    })();
 
     // =========================================================================
     // 12. SCROLL REVEAL & IPHONE ACTIVE DOCK HIGHLIGHT
